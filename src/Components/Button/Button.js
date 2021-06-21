@@ -6,11 +6,13 @@ const Button = ({
   isGray,
   width,
   borderRadius,
-  style={},
+  style = {},
+
+  isLoading,
 }) => {
-    
   return (
     <CustomeButton
+      disabled={isLoading}
       onClick={onClick}
       isGray={isGray}
       width={width}
