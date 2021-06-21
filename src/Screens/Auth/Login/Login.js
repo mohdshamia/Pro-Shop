@@ -11,11 +11,14 @@ import { loginSchema } from "../../../Valedation";
 import axios from "axios";
 import { useState } from "react";
 import { useHistory } from "react-router";
+import { loginAction } from "../../../Redux/User/userActions";
+import { useDispatch } from "react-redux";
 
-function Login({ setUser }) {
+function Login() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleSaveChanges = async (values) => {
     setError("");
@@ -29,7 +32,7 @@ function Login({ setUser }) {
       const response = await axios.post("/users/login", values);
       console.log(response);
 
-      setUser(response.data);
+      dispatch(loginAction(response.data));
 
       // Set user to localStorage
       localStorage.setItem("user", JSON.stringify(response.data));

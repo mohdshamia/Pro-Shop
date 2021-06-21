@@ -15,8 +15,9 @@ import PersonIcon from "@material-ui/icons/Person";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import { useSelector } from "react-redux";
 
-export default function Navbar({ user, setUser }) {
+export default function Navbar() {
   const Style = {
     fontSize: 25,
     color: "#FFF",
@@ -24,6 +25,9 @@ export default function Navbar({ user, setUser }) {
     margin: "auto 0 10px 0",
   };
   const [value, setValue] = useState("");
+
+  const state = useSelector((state) => state);
+
   return (
     <NavbarContainer>
       <InnerNav>
@@ -52,9 +56,9 @@ export default function Navbar({ user, setUser }) {
           </ButtonNav>
         </NavBox>
         <NavBox>
-          <Icon to={user ? "/profile" : "/login"}>
+          <Icon to={state.userDetails.user._id ? "/profile" : "/login"}>
             <PersonIcon style={Style} />
-            {user ? (
+            {state.userDetails.user._id ? (
               <Typography fontSize={"13px"} color={"#fff"}>
                 Profile
               </Typography>
@@ -80,10 +84,10 @@ export default function Navbar({ user, setUser }) {
               Cart
             </Typography>
           </Icon>
-          {user && (
+          {state.userDetails.user._id && (
             <Icon
               onClick={() => {
-                setUser(null);
+                // setUser(null);
                 localStorage.removeItem("user");
               }}
             >
