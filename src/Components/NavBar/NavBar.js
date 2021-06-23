@@ -15,7 +15,8 @@ import PersonIcon from "@material-ui/icons/Person";
 import BookmarkIcon from "@material-ui/icons/Bookmark";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logoutAction } from "../../Redux/User/userActions";
 
 export default function Navbar() {
   const Style = {
@@ -25,6 +26,7 @@ export default function Navbar() {
     margin: "auto 0 10px 0",
   };
   const [value, setValue] = useState("");
+  const dispatch = useDispatch();
 
   const state = useSelector((state) => state);
 
@@ -87,7 +89,7 @@ export default function Navbar() {
           {state.userDetails.user._id && (
             <Icon
               onClick={() => {
-                // setUser(null);
+                dispatch(logoutAction());
                 localStorage.removeItem("user");
               }}
             >

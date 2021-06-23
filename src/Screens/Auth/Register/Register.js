@@ -1,26 +1,28 @@
+import { useHistory } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { registerAction } from "../../../Redux/User/userActions";
 import { Hr, InnerSection, Typography } from "../../../Global.Styles";
-import { FormBox, StyledImage } from "./Login.Styles";
-import img from "../../../Assets/Group 240.png";
-import Button from "../../../Components/Button/Button";
+import { FormBox, StyledImage } from "../Login/Login.Styles";
+import { Form, Formik } from "formik";
+import { registerSchema } from "../../../Valedation";
 import {
   ErrorMsg,
   Input,
 } from "../../../Components/FormInput/FormInput.Styles";
-import { Form, Formik } from "formik";
-import { loginSchema } from "../../../Valedation";
-import { useHistory } from "react-router";
-import { loginAction } from "../../../Redux/User/userActions";
-import { useDispatch, useSelector } from "react-redux";
+import Button from "../../../Components/Button/Button";
+import img from "../../../Assets/Group 240.png";
+import { Link } from "react-router-dom";
 
-function Login() {
+function Register() {
   const history = useHistory();
   const dispatch = useDispatch();
   const state = useSelector((store) => store);
-  const error = state.userDetails.error;
-  const isLoading = state.userDetails.isLoading;
+  const userDetails = state.userDetails;
+
+  const { error, isLoading } = userDetails;
 
   const handleSaveChanges = async (values) => {
-    dispatch(loginAction(values, history));
+    dispatch(registerAction(values, history));
   };
 
   return (
@@ -41,7 +43,7 @@ function Login() {
             justifyContent: "start",
           }}
         >
-          Login.
+          Register.
         </Typography>
         <Typography
           fontSize={28}
@@ -59,8 +61,10 @@ function Login() {
           initialValues={{
             email: "",
             password: "",
+            passwordConfirmation: "",
+            name: "",
           }}
-          validationSchema={loginSchema()}
+          validationSchema={registerSchema()}
           onSubmit={handleSaveChanges}
         >
           {({ errors, touched }) => {
@@ -75,6 +79,11 @@ function Login() {
                   flexDirection: "column",
                 }}
               >
+                <Input name={"name"} type={"name"} placeholder={"Name"} />
+                {errors.name && touched.name ? (
+                  <ErrorMsg>{errors.name}</ErrorMsg>
+                ) : null}
+
                 <Input name={"email"} type={"email"} placeholder={"Email"} />
                 {errors.email && touched.email ? (
                   <ErrorMsg>{errors.email}</ErrorMsg>
@@ -89,13 +98,22 @@ function Login() {
                   <ErrorMsg>{errors.password}</ErrorMsg>
                 ) : null}
 
+                <Input
+                  name={"passwordConfirmation"}
+                  type={"password"}
+                  placeholder={"Confirmation password"}
+                />
+                {errors.passwordConfirmation && touched.passwordConfirmation ? (
+                  <ErrorMsg>{errors.passwordConfirmation}</ErrorMsg>
+                ) : null}
+
                 {error ? <ErrorMsg>{error}</ErrorMsg> : null}
 
                 <Button
                   isLoading={isLoading}
                   width={"100%"}
                   borderRadius={6}
-                  text={"Login"}
+                  text={"Sign up"}
                 />
               </Form>
             );
@@ -107,25 +125,21 @@ function Login() {
           style={{
             margin: "16px 0 22px 0",
           }}
-        >
-          Forgot your password?
-        </Typography>
+        ></Typography>
         <Hr />
-        <Button
-          link={"/register"}
-          width={"100%"}
-          borderRadius={20}
-          text={"Sign up now"}
+        <Typography
+          fontSize={22}
+          color={"#707070"}
           style={{
-            border: "3px solid #FCDD06",
-            marginTop: 40,
-            background: "#fff",
+            margin: "40px 0 22px 0",
           }}
-        />
+        >
+          Have an account ? <Link to={"/login"}>Login</Link>
+        </Typography>
       </FormBox>
       <StyledImage src={img} />
     </InnerSection>
   );
 }
 
-export default Login;
+export default Register;

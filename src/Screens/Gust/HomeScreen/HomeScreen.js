@@ -1,29 +1,29 @@
-import { FlexColumn } from "../../../Global.Styles";
+import { FlexColumn, SpinnerContainer } from "../../../Global.Styles";
 import HeroSection from "./HeroSection";
 import FeaturedProductsSection from "./FeaturedProductsSection";
 import TopRatedSection from "./TopRatedSection";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  getFeaturedProducts,
+  getSliderImages,
+} from "../../../Redux/Guest/guestActions";
 
 const HomeScreen = () => {
-  const [sliderProducts, setSliderProducts] = useState([]);
-
-  const fetchData = async () => {
-    try {
-      const response = await axios.get("/products/top");
-
-      setSliderProducts(response.data);
-    } catch (e) {}
-  };
+  const dispatch = useDispatch();
+  const state = useSelector((state) => state);
 
   useEffect(() => {
-    fetchData();
-  }, []);
+    dispatch(getSliderImages());
+    dispatch(getFeaturedProducts());
+  }, [dispatch]);
 
-  return (
+  return state.guestState.isLoading ? (
+    <SpinnerContainer />
+  ) : (
     <FlexColumn>
-      <HeroSection sliderProducts={sliderProducts} />
-      <FeaturedProductsSection />
+      <HeroSection sliderProducts={state.guestState.sliderImages} />
+      <FeaturedProductsSection products={state.guestState.products || []} />
       <TopRatedSection />
     </FlexColumn>
   );

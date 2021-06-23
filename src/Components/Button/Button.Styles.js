@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const CustomeButton = styled("button")`
+export const CustomeButton = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,6 +13,7 @@ export const CustomeButton = styled("button")`
   border: none;
   font-size: 24px;
   cursor: pointer;
+  text-decoration: none;
 
   ${(props) =>
     props.disabled

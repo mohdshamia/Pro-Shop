@@ -6,11 +6,7 @@ import {
   Typography,
 } from "../../../Global.Styles";
 import SwipeableViews from "react-swipeable-views";
-import {
-  Divider,
-  Dot,
-  YellowDivider,
-} from "./HomeScreen.Styles";
+import { Divider, Dot, YellowDivider } from "./HomeScreen.Styles";
 import slideImage from "../../../Assets/img1.PNG";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 
@@ -21,10 +17,39 @@ const styles = {
     height: 678,
   },
 };
-function FeaturedProductsSection(props) {
+function FeaturedProductsSection({ products }) {
   const [sliderIndex, setSliderIndex] = useState(0);
+  const [condition, setCondition] = useState(3);
 
   const handleChangeIndex = () => {};
+
+  const getSlides = (slice) => {
+    return (
+      <FlexRow>
+        <ProductCard
+          image={slice[0]}
+          name={"Omar"}
+          discount={10}
+          price={200}
+          rate={4}
+        />
+        <ProductCard
+          image={slideImage}
+          name={"Omar"}
+          discount={10}
+          price={200}
+          rate={4}
+        />
+        <ProductCard
+          image={slideImage}
+          name={"Omar"}
+          discount={10}
+          price={200}
+          rate={4}
+        />
+      </FlexRow>
+    );
+  };
 
   return (
     <FlexBox color={"#F7F8FC"}>
@@ -41,75 +66,33 @@ function FeaturedProductsSection(props) {
           index={sliderIndex}
           onChangeIndex={handleChangeIndex}
         >
-          <FlexRow>
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-          </FlexRow>
-          <FlexRow>
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-          </FlexRow>
-          <FlexRow>
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-            <ProductCard
-              image={slideImage}
-              name={"Omar"}
-              discount={10}
-              price={200}
-              rate={4}
-            />
-          </FlexRow>
+          {products.map((i, index) => {
+            return (
+              <FlexRow>
+                <ProductCard
+                  image={0}
+                  name={"Omar"}
+                  discount={10}
+                  price={200}
+                  rate={4}
+                />
+                <ProductCard
+                  image={slideImage}
+                  name={"Omar"}
+                  discount={10}
+                  price={200}
+                  rate={4}
+                />
+                <ProductCard
+                  image={slideImage}
+                  name={"Omar"}
+                  discount={10}
+                  price={200}
+                  rate={4}
+                />
+              </FlexRow>
+            );
+          })}
         </SwipeableViews>
 
         <FlexRow style={{ marginBottom: 40, marginTop: 40 }}>

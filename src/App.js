@@ -3,15 +3,10 @@ import NavBar from "./Components/NavBar/NavBar";
 import HomeScreen from "./Screens/Gust/HomeScreen/HomeScreen";
 import { Route, Switch } from "react-router";
 import Login from "./Screens/Auth/Login/Login";
-import { useState } from "react";
 import { useSelector } from "react-redux";
+import Register from "./Screens/Auth/Register/Register";
 
 function App() {
-  /*
-  const userFromLocalStorage = JSON.parse(localStorage.getItem("user"));
-
-  const [user, setUser] = useState(userFromLocalStorage);*/
-
   const state = useSelector((state) => state);
 
   console.log("store state", state);
@@ -26,6 +21,14 @@ function App() {
             path={"/login"}
             component={() => {
               return <Login />;
+            }}
+          />
+        )}
+        {state.userDetails.user._id ? null : (
+          <Route
+            path={"/register"}
+            component={() => {
+              return <Register />;
             }}
           />
         )}

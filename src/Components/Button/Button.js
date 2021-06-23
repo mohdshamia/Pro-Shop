@@ -7,11 +7,13 @@ const Button = ({
   width,
   borderRadius,
   style = {},
-
   isLoading,
+  link = "",
 }) => {
   return (
     <CustomeButton
+      to={link}
+      as={link ? "" : "button"}
       disabled={isLoading}
       onClick={onClick}
       isGray={isGray}
