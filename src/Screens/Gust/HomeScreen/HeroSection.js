@@ -53,6 +53,7 @@ function HeroSection({ sliderProducts }) {
                   {item.description.substring(0, 80)}
                 </Typography>
                 <Button
+                  link={`/product/${item._id}/${item.name}`}
                   text="Shop now"
                   width={"220px"}
                   borderRadius={20}

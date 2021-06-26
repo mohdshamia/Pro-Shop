@@ -12,7 +12,6 @@ export const Input = styled(Field)`
   width: 100%;
   margin-bottom: 22px;
   border: 1px solid #242424;
-
   &::placeholder {
     outline: none;
   }

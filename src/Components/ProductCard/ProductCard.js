@@ -6,7 +6,10 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 
 function ProductCard(props) {
   return (
-    <CardContainer widthBorder={props.widthBorder}>
+    <CardContainer
+      widthBorder={props.widthBorder}
+      to={`/product/${props.id}/${props.name}`}
+    >
       <CardImage src={props.image} alt={props.name} />
       <Typography fontSize={24}>{props.name}</Typography>
       <Rating name="simple-controlled" value={props.rate} />
@@ -17,7 +20,7 @@ function ProductCard(props) {
           maxWidth: "40%",
         }}
       >
-        {props.discount && (
+        {props.discount > 0 && (
           <Typography color={"#FC4059"} fontSize={30}>
             $ {props.discount}
           </Typography>
@@ -25,7 +28,7 @@ function ProductCard(props) {
         <Typography
           fontSize={30}
           fontWeight={700}
-          style={{ textDecoration: props.discount&&"line-through" }}
+          style={{ textDecoration: props.discount && "line-through" }}
         >
           ${props.price}
         </Typography>

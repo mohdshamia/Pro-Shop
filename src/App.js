@@ -5,6 +5,10 @@ import { Route, Switch } from "react-router";
 import Login from "./Screens/Auth/Login/Login";
 import { useSelector } from "react-redux";
 import Register from "./Screens/Auth/Register/Register";
+import ProfileScreen from "./Screens/User/ProfileScreen/ProfileScreen";
+import UpdateProfileScreen from "./Screens/User/UpdateProfileScreen/UpdateProfileScreen";
+import { Fragment } from "react";
+import ProductScreen from "./Screens/Gust/ProductScreen/ProductScreen";
 
 function App() {
   const state = useSelector((state) => state);
@@ -16,21 +20,36 @@ function App() {
       <NavBar />
       <Switch>
         <Route path={"/"} exact={true} component={HomeScreen} />
-        {state.userDetails.user._id ? null : (
-          <Route
-            path={"/login"}
-            component={() => {
-              return <Login />;
-            }}
-          />
-        )}
-        {state.userDetails.user._id ? null : (
-          <Route
-            path={"/register"}
-            component={() => {
-              return <Register />;
-            }}
-          />
+        <Route
+          path={"/product/:id/:name"}
+          exact={true}
+          component={ProductScreen}
+        />
+        {/** Make it protected*/}
+        {state.userDetails.user._id ? (
+          <>
+            <Route path={"/profile"} exact={true} component={ProfileScreen} />
+            <Route
+              path={"/update-profile"}
+              exact={true}
+              component={UpdateProfileScreen}
+            />
+          </>
+        ) : (
+          <Fragment>
+            <Route
+              path={"/login"}
+              component={() => {
+                return <Login />;
+              }}
+            />
+            <Route
+              path={"/register"}
+              component={() => {
+                return <Register />;
+              }}
+            />
+          </Fragment>
         )}
       </Switch>
     </MainContainer>

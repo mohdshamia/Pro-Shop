@@ -23,8 +23,8 @@ const HomeScreen = () => {
   ) : (
     <FlexColumn>
       <HeroSection sliderProducts={state.guestState.sliderImages} />
-      <FeaturedProductsSection products={state.guestState.products || []} />
-      <TopRatedSection />
+      <FeaturedProductsSection products={state.guestState.products} />
+      <TopRatedSection topRatedProducts={state.guestState.sliderImages} />
     </FlexColumn>
   );
 };

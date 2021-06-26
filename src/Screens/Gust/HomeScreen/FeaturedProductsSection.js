@@ -7,7 +7,6 @@ import {
 } from "../../../Global.Styles";
 import SwipeableViews from "react-swipeable-views";
 import { Divider, Dot, YellowDivider } from "./HomeScreen.Styles";
-import slideImage from "../../../Assets/img1.PNG";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 
 const styles = {
@@ -19,36 +18,43 @@ const styles = {
 };
 function FeaturedProductsSection({ products }) {
   const [sliderIndex, setSliderIndex] = useState(0);
-  const [condition, setCondition] = useState(3);
+  //                 Desktop>1100                  Tablet>800 & <1100             Mobile <800
+  const chunkSize =
+    window.innerWidth > 1100 ? 3 : window.innerWidth > 800 ? 2 : 1;
 
   const handleChangeIndex = () => {};
 
-  const getSlides = (slice) => {
-    return (
-      <FlexRow>
-        <ProductCard
-          image={slice[0]}
-          name={"Omar"}
-          discount={10}
-          price={200}
-          rate={4}
-        />
-        <ProductCard
-          image={slideImage}
-          name={"Omar"}
-          discount={10}
-          price={200}
-          rate={4}
-        />
-        <ProductCard
-          image={slideImage}
-          name={"Omar"}
-          discount={10}
-          price={200}
-          rate={4}
-        />
+  const getSlides = () => {
+    const chunks = [];
+
+    products.map((i, idx) => {
+      if (idx % chunkSize === 0) {
+        chunks.push([]);
+      }
+
+      const firstArrayLength = chunks.length;
+      const secondArrayLength = chunks[firstArrayLength - 1].length;
+
+      chunks[firstArrayLength - 1][secondArrayLength] = i;
+
+      return i;
+    });
+
+    return chunks.map((i, idx) => (
+      <FlexRow key={idx}>
+        {i.map((item) => (
+          <ProductCard
+            key={item._id}
+            id={item._id}
+            image={"https://proshop-ms.herokuapp.com/" + item.image}
+            name={item.name}
+            discount={0}
+            price={item.price}
+            rate={item.rating}
+          />
+        ))}
       </FlexRow>
-    );
+    ));
   };
 
   return (
@@ -66,57 +72,20 @@ function FeaturedProductsSection({ products }) {
           index={sliderIndex}
           onChangeIndex={handleChangeIndex}
         >
-          {products.map((i, index) => {
-            return (
-              <FlexRow>
-                <ProductCard
-                  image={0}
-                  name={"Omar"}
-                  discount={10}
-                  price={200}
-                  rate={4}
-                />
-                <ProductCard
-                  image={slideImage}
-                  name={"Omar"}
-                  discount={10}
-                  price={200}
-                  rate={4}
-                />
-                <ProductCard
-                  image={slideImage}
-                  name={"Omar"}
-                  discount={10}
-                  price={200}
-                  rate={4}
-                />
-              </FlexRow>
-            );
-          })}
+          {getSlides()}
         </SwipeableViews>
 
         <FlexRow style={{ marginBottom: 40, marginTop: 40 }}>
-          <Dot
-            size={14}
-            isGray={sliderIndex !== 0}
-            onClick={() => {
-              setSliderIndex(0);
-            }}
-          />
-          <Dot
-            size={14}
-            isGray={sliderIndex !== 1}
-            onClick={() => {
-              setSliderIndex(1);
-            }}
-          />
-          <Dot
-            size={14}
-            isGray={sliderIndex !== 2}
-            onClick={() => {
-              setSliderIndex(2);
-            }}
-          />
+          {getSlides().map((i, idx) => (
+            <Dot
+              size={14}
+              key={idx}
+              isGray={sliderIndex !== idx}
+              onClick={() => {
+                setSliderIndex(idx);
+              }}
+            />
+          ))}
         </FlexRow>
       </InnerSection>
     </FlexBox>

@@ -1,4 +1,7 @@
 import {
+  USER_GET_PROFILE_FAILED,
+  USER_GET_PROFILE_START,
+  USER_GET_PROFILE_SUCCESS,
   USER_LOGIN_FAILED,
   USER_LOGIN_START,
   USER_LOGIN_SUCCESS,
@@ -6,6 +9,9 @@ import {
   USER_REGISTER_FAILED,
   USER_REGISTER_START,
   USER_REGISTER_SUCCESS,
+  USER_UPDATE_PROFILE_FAILED,
+  USER_UPDATE_PROFILE_START,
+  USER_UPDATE_PROFILE_SUCCESS,
 } from "./userTypesConstants";
 
 export const userReducer = (
@@ -15,6 +21,9 @@ export const userReducer = (
       name: "",
       email: "",
       token: "",
+    },
+    userProfile: {
+      user: {},
     },
     success: false,
     isLoading: false,
@@ -70,6 +79,56 @@ export const userReducer = (
         ...initialState,
         error: action.payload,
         isLoading: false,
+      };
+
+    /** Update profile cases */
+    case USER_UPDATE_PROFILE_START:
+      return {
+        ...initialState,
+        isLoading: true,
+      };
+
+    case USER_UPDATE_PROFILE_SUCCESS:
+      return {
+        user: action.payload,
+        isLoading: false,
+        success: true,
+      };
+
+    case USER_UPDATE_PROFILE_FAILED:
+      return {
+        ...initialState,
+        error: action.payload,
+        isLoading: false,
+      };
+
+    /** Get profile cases */
+    case USER_GET_PROFILE_START:
+      return {
+        ...initialState,
+        userProfile: {
+          isLoading: true,
+        },
+      };
+
+    case USER_GET_PROFILE_SUCCESS:
+      return {
+        ...initialState,
+        userProfile: {
+          user: action.payload,
+          isLoading: false,
+          success: true,
+        },
+      };
+
+    case USER_GET_PROFILE_FAILED:
+      return {
+        ...initialState,
+
+        userProfile: {
+          error: action.payload,
+          isLoading: false,
+        },
       };
 
     /** Logout cases */
