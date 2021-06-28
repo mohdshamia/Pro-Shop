@@ -9,6 +9,7 @@ import ProfileScreen from "./Screens/User/ProfileScreen/ProfileScreen";
 import UpdateProfileScreen from "./Screens/User/UpdateProfileScreen/UpdateProfileScreen";
 import { Fragment } from "react";
 import ProductScreen from "./Screens/Gust/ProductScreen/ProductScreen";
+import CartScreen from "./Screens/User/CartScreen/CartScreen";
 
 function App() {
   const state = useSelector((state) => state);
@@ -28,6 +29,7 @@ function App() {
         {/** Make it protected*/}
         {state.userDetails.user._id ? (
           <>
+            <Route path={"/cart"} exact={true} component={CartScreen} />
             <Route path={"/profile"} exact={true} component={ProfileScreen} />
             <Route
               path={"/update-profile"}

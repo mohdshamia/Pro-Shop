@@ -23,6 +23,7 @@ function TopRatedSection({ topRatedProducts }) {
         <BorderedBox>
           {topRatedProducts.map((item) => (
             <ProductCard
+              product={item}
               id={item._id}
               key={item._id}
               widthBorder={true}

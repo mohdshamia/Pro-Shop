@@ -9,6 +9,7 @@ const Button = ({
   style = {},
   isLoading,
   link = "",
+  disabled,
 }) => {
   return (
     <CustomeButton

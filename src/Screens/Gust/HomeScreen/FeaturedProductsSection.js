@@ -44,6 +44,7 @@ function FeaturedProductsSection({ products }) {
       <FlexRow key={idx}>
         {i.map((item) => (
           <ProductCard
+            product={item}
             key={item._id}
             id={item._id}
             image={"https://proshop-ms.herokuapp.com/" + item.image}

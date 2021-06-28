@@ -24,6 +24,5 @@ export const ProfileText = styled(Link)`
 `;
 
 export const StyledRow = styled(FlexRow)`
-  max-width: 40%;
-  justify-content: space-between;
+  justify-content: start;
 `;

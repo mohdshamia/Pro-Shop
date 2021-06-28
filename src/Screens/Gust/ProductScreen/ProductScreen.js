@@ -11,7 +11,6 @@ import {
   RIcon,
   SpecificationContainer,
   StyledFlexColumn,
-  Title,
 } from "./Product.Styles";
 import RemoveIcon from "@material-ui/icons/Remove";
 import FeaturedProductsSection from "../HomeScreen/FeaturedProductsSection";
@@ -25,20 +24,16 @@ import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import Button from "../../../Components/Button/Button";
 import AddIcon from "@material-ui/icons/Add";
 import Review from "../../../Components/Review/Review";
-import { useHistory, useParams } from "react-router";
+import { useParams } from "react-router";
+import Navigator from "../../../Components/Navigator/Navigator";
 
 function ProductScreen(props) {
   const [count, setCount] = useState(1);
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const params = useParams();
-  const history = useHistory();
   const product = state.guestState.product;
-  console.log(state);
 
-  const goBack = () => {
-    history.goBack();
-  };
   useEffect(() => {
     dispatch(getFeaturedProducts());
     dispatch(getProduct(params.id));
@@ -50,20 +45,11 @@ function ProductScreen(props) {
     <FlexColumn style={{ marginBottom: 100 }}>
       <SpecificationContainer>
         <HeroSection>
-          <Title>
-            <span
-              style={{ color: "#707070", marginRight: 5, cursor: "pointer" }}
-              onClick={goBack}
-            >
-              Back{" "}
-            </span>{" "}
-            /{product.product.name}
-          </Title>
+          <Navigator name={product.product.name} />
           <FlexRow style={{ alignItems: "flex-start" }}>
             <FlexColumn
               style={{
                 width: 501,
-                height: 600,
                 justifyContent: "start",
                 marginTop: 30,
               }}

@@ -50,13 +50,17 @@ function ProfileScreen(props) {
           <ProfileText isGray as={"span"}>
             Name
           </ProfileText>
-          <ProfileText as={"span"}>{state.userDetails.user.name}</ProfileText>
+          <ProfileText as={"span"} style={{ marginLeft: 60 }}>
+            {state.userDetails.user.name}
+          </ProfileText>
         </StyledRow>
         <StyledRow>
           <ProfileText isGray as={"span"}>
             Email
           </ProfileText>
-          <ProfileText as={"span"}>{state.userDetails.user.email}</ProfileText>
+          <ProfileText style={{ marginLeft: 60 }} as={"span"}>
+            {state.userDetails.user.email}
+          </ProfileText>
         </StyledRow>
 
         <Button
