@@ -77,3 +77,9 @@ export const SpinnerContainer = styled.div`
     }
   }
 `;
+
+export const Line = styled("hr")`
+  width: ${(props) => (props.width ? props.width : "200px")};
+  height: ${(props) => (props.height ? props.height : "1px")};
+  color: ${(props) => (props.color ? props.color : "#000")};
+`;

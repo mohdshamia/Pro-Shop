@@ -3,14 +3,18 @@ import { userReducer } from "./User/userReducer";
 import thunk from "redux-thunk";
 import { guestReducers } from "./Guest/guestReducers";
 import { cartReducer } from "./Cart/cartReducer";
+import { ordersReducers } from "./Orders/ordersReducers";
 
 const reducers = combineReducers({
   userDetails: userReducer,
   guestState: guestReducers,
   cart: cartReducer,
+  orders: ordersReducers,
 });
 
 const userFromLocalStorage = JSON.parse(localStorage.getItem("user")) || {};
+const shippingFromLocalStorage =
+  JSON.parse(localStorage.getItem("shipping")) || {};
 const cartFromLocalStorage = JSON.parse(localStorage.getItem("cart")) || [];
 
 const initialState = {
@@ -19,6 +23,7 @@ const initialState = {
   },
   cart: {
     cart: cartFromLocalStorage,
+    shippingAddress: shippingFromLocalStorage,
   },
 };
 

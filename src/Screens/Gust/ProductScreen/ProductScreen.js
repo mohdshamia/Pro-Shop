@@ -26,6 +26,7 @@ import AddIcon from "@material-ui/icons/Add";
 import Review from "../../../Components/Review/Review";
 import { useParams } from "react-router";
 import Navigator from "../../../Components/Navigator/Navigator";
+import { addCartItem } from "../../../Redux/Cart/cartActions";
 
 function ProductScreen(props) {
   const [count, setCount] = useState(1);
@@ -103,7 +104,8 @@ function ProductScreen(props) {
                     </Typography>
                     <RIcon
                       onClick={() => {
-                        if (count >= 1) setCount(count + 1);
+                        if (count < product.product.countInStock)
+                          setCount(count + 1);
                       }}
                     >
                       <AddIcon />
@@ -148,6 +150,12 @@ function ProductScreen(props) {
                       width={"324px"}
                       borderRadius={10}
                       style={{ height: 62 }}
+                      disabled={product.product.countInStock}
+                      link={"/cart"}
+                      onClick={() => {
+                        if (product.product.countInStock)
+                          dispatch(addCartItem(product.product, count));
+                      }}
                     />
                   </FlexRow>
                 </FlexRow>

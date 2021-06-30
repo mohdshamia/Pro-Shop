@@ -5,16 +5,23 @@ import { FlexRow, Typography } from "../../Global.Styles";
 import { RIcon } from "../../Screens/Gust/ProductScreen/Product.Styles";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
+import { CrossSpan } from "../../Screens/User/CartScreen/CartScreen.Styles";
 
-function CartItem({ counter, setCounter, price, image, name, handleDelete }) {
+function CartItem({
+  counter,
+  increaseCounter,
+  decreaseCounter,
+  price,
+  image,
+  name,
+  handleDelete,
+}) {
   return (
     <CardBox>
       <CardImage src={"https://proshop-ms.herokuapp.com/" + image} alt={name} />
       <ContentBox>
         <FlexRow style={{ justifyContent: "flex-end" }}>
-          <span style={{ fontSize: 14, padding: 10 }} onClick={handleDelete}>
-            x
-          </span>
+          <CrossSpan onClick={handleDelete}>x</CrossSpan>
         </FlexRow>
         <Typography
           fontSize={24}
@@ -32,11 +39,7 @@ function CartItem({ counter, setCounter, price, image, name, handleDelete }) {
               background: "#FFFFFF",
             }}
           >
-            <RIcon
-              onClick={() => {
-                if (counter > 1) setCounter(counter - 1);
-              }}
-            >
+            <RIcon onClick={decreaseCounter}>
               <RemoveIcon />
             </RIcon>
             <Typography
@@ -48,11 +51,7 @@ function CartItem({ counter, setCounter, price, image, name, handleDelete }) {
             >
               {counter}
             </Typography>
-            <RIcon
-              onClick={() => {
-                if (counter >= 1) setCounter(counter + 1);
-              }}
-            >
+            <RIcon onClick={increaseCounter}>
               <AddIcon />
             </RIcon>
           </FlexRow>
@@ -75,7 +74,8 @@ function CartItem({ counter, setCounter, price, image, name, handleDelete }) {
 
 CartItem.defaultProps = {
   handleDelete: () => {},
-  setCounter: () => {},
+  decreaseCounter: () => {},
+  increaseCounter: () => {},
   counter: 1,
 };
 
@@ -84,7 +84,8 @@ CartItem.propTypes = {
   image: propTypes.string.isRequired,
   counter: propTypes.number.isRequired,
   price: propTypes.number.isRequired,
-  setCounter: propTypes.func.isRequired,
+  increaseCounter: propTypes.func.isRequired,
+  decreaseCounter: propTypes.func.isRequired,
   handleDelete: propTypes.func.isRequired,
 };
 

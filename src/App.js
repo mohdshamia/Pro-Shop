@@ -10,6 +10,7 @@ import UpdateProfileScreen from "./Screens/User/UpdateProfileScreen/UpdateProfil
 import { Fragment } from "react";
 import ProductScreen from "./Screens/Gust/ProductScreen/ProductScreen";
 import CartScreen from "./Screens/User/CartScreen/CartScreen";
+import Payment from "./Screens/User/Payment/Payment";
 
 function App() {
   const state = useSelector((state) => state);
@@ -31,6 +32,16 @@ function App() {
           <>
             <Route path={"/cart"} exact={true} component={CartScreen} />
             <Route path={"/profile"} exact={true} component={ProfileScreen} />
+            <Route
+              path={"/proceed-checkout/shipping-address"}
+              exact={true}
+              component={Payment}
+            />
+            <Route
+              path={"/proceed-checkout/place-order"}
+              exact={true}
+              component={Payment}
+            />
             <Route
               path={"/update-profile"}
               exact={true}

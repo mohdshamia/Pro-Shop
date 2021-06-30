@@ -12,3 +12,10 @@ export const ProceedBox = styled(FlexColumn)`
   background: #f2f2f2 0% 0% no-repeat padding-box;
   border-radius: 16px;
 `;
+
+export const CrossSpan = styled("span")((props) => ({
+  fontSize: 18,
+  padding: 5,
+  fontWeight: 700,
+  cursor: "pointer",
+}));
