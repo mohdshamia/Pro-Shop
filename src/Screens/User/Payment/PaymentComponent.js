@@ -42,7 +42,7 @@ function PaymentComponent(props) {
           country: state.cart.shippingAddress.country || "",
           city: state.cart.shippingAddress.city || "",
           address: state.cart.shippingAddress.address || "",
-          zipCode: state.cart.shippingAddress.zipCode || "",
+          postalCode: state.cart.shippingAddress.postalCode || "",
         }}
         validationSchema={ShippingSchema()}
         onSubmit={handleSaveShipping}
@@ -156,12 +156,12 @@ function PaymentComponent(props) {
 
                       <Input
                         style={{ width: "360px" }}
-                        name={"zipCode"}
+                        name={"postalCode"}
                         type={"number"}
                         placeholder={"Zip code"}
                       />
-                      {errors.zipCode && touched.zipCode ? (
-                        <ErrorMsg>{errors.zipCode}</ErrorMsg>
+                      {errors.postalCode && touched.postalCode ? (
+                        <ErrorMsg>{errors.postalCode}</ErrorMsg>
                       ) : null}
                     </FlexColumn>
                     <FlexColumn

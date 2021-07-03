@@ -1,12 +1,85 @@
 import axios from "axios";
-import { PLACE_ORDER_START } from "./ordersTypesConstants";
+import {
+  GET_ORDERS_FAILED,
+  GET_ORDERS_START,
+  GET_ORDERS_SUCCESS,
+  PLACE_ORDER_FAILED,
+  PLACE_ORDER_START,
+  PLACE_ORDER_SUCCESS,
+} from "./ordersTypesConstants";
+import { RESET_CART } from "../Cart/cartTypesConstants";
 
-export const placeOrder = () => async (dispatch, getState) => {
+export const placeOrder = (history) => async (dispatch, getState) => {
   try {
     dispatch({
       type: PLACE_ORDER_START,
     });
+    const state = getState();
 
-    const { data } = axios.post("");
-  } catch (e) {}
+    const requestData = {
+      orderItems: state.cart.cart,
+      shippingAddress: state.cart.shippingAddress,
+      paymentMethod: "PayPal",
+      totalPrice: state.cart.cart
+        .reduce((acc, item) => acc + item.price * item.quantity, 0)
+        .toFixed(2),
+    };
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.userDetails.user.token}`,
+      },
+    };
+
+    const response = await axios.post("/orders", requestData, config);
+
+    dispatch({
+      type: PLACE_ORDER_SUCCESS,
+      payload: response.data._id,
+    });
+
+    dispatch({
+      type: RESET_CART,
+    });
+
+    localStorage.removeItem("cart");
+
+    history.push("/order/" + response.data._id);
+  } catch (e) {
+    console.log(e.response);
+    dispatch({
+      payload: e?.response?.data?.message,
+      type: PLACE_ORDER_FAILED,
+    });
+  }
+};
+
+export const getOrders = () => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GET_ORDERS_START,
+    });
+    const state = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.userDetails.user.token}`,
+      },
+    };
+
+    const response = await axios.get("/orders", config);
+
+    dispatch({
+      type: GET_ORDERS_SUCCESS,
+      payload: response.data,
+    });
+  } catch (e) {
+    console.log(e.response);
+    dispatch({
+      payload: e?.response?.data?.message,
+      type: GET_ORDERS_FAILED,
+    });
+  }
 };

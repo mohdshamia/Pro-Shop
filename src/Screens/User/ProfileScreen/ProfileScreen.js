@@ -24,7 +24,7 @@ function ProfileScreen(props) {
         >
           {state.userDetails.user.name}
         </Typography>
-        <ProfileText to={""}>My Orders</ProfileText>
+        <ProfileText to={"/orders"}>My Orders</ProfileText>
         <ProfileText to={""}>Settings</ProfileText>
         <ProfileText
           onClick={() => {

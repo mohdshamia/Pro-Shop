@@ -15,6 +15,7 @@ export const addCartItem = (product, quantity) => (dispatch, getState) => {
 
   if (isProductExist) {
     isProductExist.quantity += quantity;
+    isProductExist.qty += quantity;
 
     const index = state.cart.cart.findIndex(
       (item) => item._id == isProductExist._id
@@ -28,6 +29,8 @@ export const addCartItem = (product, quantity) => (dispatch, getState) => {
     });
   } else {
     product.quantity = quantity;
+    product.qty = quantity;
+    product.product = product._id;
 
     dispatch({
       type: ADD_TO_CART,
@@ -48,6 +51,7 @@ export const decreaseCartItemQty =
 
     if (isProductExist) {
       isProductExist.quantity -= quantity;
+      isProductExist.qty -= quantity;
 
       const index = state.cart.cart.findIndex(
         (item) => item._id == isProductExist._id

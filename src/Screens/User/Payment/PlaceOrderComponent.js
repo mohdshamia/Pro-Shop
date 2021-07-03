@@ -1,19 +1,23 @@
 import {
-  ChangeBtn,
+  ErrorMessage,
   Order,
   OrderDetail,
   OrderDetails,
-  PaymentDetail,
   Shipping,
   ShippingAddress,
 } from "./Payment.Styles";
 import { FlexRow, Typography } from "../../../Global.Styles";
 import OrderCard from "../../../Components/OrderCard/OrderCard";
 import Button from "../../../Components/Button/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { placeOrder } from "../../../Redux/Orders/ordersActions";
+import { useHistory } from "react-router";
+import { useEffect } from "react";
 
-function PlaceOrderComponent(props) {
+function PlaceOrderComponent() {
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   return (
     <FlexRow
@@ -74,9 +78,10 @@ function PlaceOrderComponent(props) {
           {/* Order Items */}
           {state.cart.cart.map((i) => (
             <OrderCard
+              key={i._id}
               src={"https://proshop-ms.herokuapp.com/" + i.image}
               orderName={i.name}
-              orderNumber={"1"}
+              orderNumber={i.quantity}
               subTotal={i.price * i.quantity}
               price={i.price}
             />
@@ -100,7 +105,10 @@ function PlaceOrderComponent(props) {
               Subtotal
             </Typography>
             <Typography style={{ justifyContent: "start" }} color={"#707070"}>
-              $589.98
+              $
+              {state.cart.cart
+                .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                .toFixed(2)}
             </Typography>
           </FlexRow>
           <FlexRow style={{ justifyContent: "space-between" }}>
@@ -108,15 +116,7 @@ function PlaceOrderComponent(props) {
               Tax
             </Typography>
             <Typography style={{ justifyContent: "start" }} color={"#707070"}>
-              $2.53
-            </Typography>
-          </FlexRow>
-          <FlexRow style={{ justifyContent: "space-between" }}>
-            <Typography style={{ justifyContent: "start" }} color={"#707070"}>
-              Shipping
-            </Typography>
-            <Typography style={{ justifyContent: "start" }} color={"#707070"}>
-              $0.00
+              $0
             </Typography>
           </FlexRow>
           <FlexRow style={{ justifyContent: "space-between" }}>
@@ -132,11 +132,20 @@ function PlaceOrderComponent(props) {
               color={"#242424"}
               fontWeight={"bold"}
             >
-              $592.51
+              $
+              {state.cart.cart
+                .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                .toFixed(2)}
             </Typography>
           </FlexRow>
         </OrderDetails>
+
+        {state.orders.placeOrder.error && (
+          <ErrorMessage>{state.orders.placeOrder.error}</ErrorMessage>
+        )}
         <Button
+          isLoading={state.orders.placeOrder.isLoading}
+          onClick={() => dispatch(placeOrder(history))}
           text={"Place Order"}
           width={"324px"}
           style={{ height: "62px", alignSelf: "flex-end", marginTop: "30px" }}

@@ -46,6 +46,6 @@ export const ShippingSchema = () => {
     country: yup.string().required("Please enter country name"),
     city: yup.string().required("Please enter city name"),
     address: yup.string().required("Please enter your address"),
-    zipCode: yup.number().required("Please enter your zip code"),
+    postalCode: yup.number().required("Please enter your zip code"),
   });
 };

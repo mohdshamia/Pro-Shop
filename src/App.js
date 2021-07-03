@@ -11,6 +11,8 @@ import { Fragment } from "react";
 import ProductScreen from "./Screens/Gust/ProductScreen/ProductScreen";
 import CartScreen from "./Screens/User/CartScreen/CartScreen";
 import Payment from "./Screens/User/Payment/Payment";
+import Order from "./Screens/User/Order/Order";
+import Orders from "./Screens/User/Orders/Orders";
 
 function App() {
   const state = useSelector((state) => state);
@@ -30,14 +32,23 @@ function App() {
         {/** Make it protected*/}
         {state.userDetails.user._id ? (
           <>
+            <Route
+              key={50}
+              path={"/order/:id"}
+              exact={true}
+              component={Order}
+            />
+            <Route path={"/orders"} exact={true} component={Orders} />
             <Route path={"/cart"} exact={true} component={CartScreen} />
             <Route path={"/profile"} exact={true} component={ProfileScreen} />
             <Route
               path={"/proceed-checkout/shipping-address"}
               exact={true}
+              key={405}
               component={Payment}
             />
             <Route
+              key={402}
               path={"/proceed-checkout/place-order"}
               exact={true}
               component={Payment}
