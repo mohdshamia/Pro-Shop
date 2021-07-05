@@ -1,5 +1,8 @@
 import axios from "axios";
 import {
+  GET_ORDER_FAILED,
+  GET_ORDER_START,
+  GET_ORDER_SUCCESS,
   GET_ORDERS_FAILED,
   GET_ORDERS_START,
   GET_ORDERS_SUCCESS,
@@ -76,10 +79,37 @@ export const getOrders = () => async (dispatch, getState) => {
       payload: response.data,
     });
   } catch (e) {
-    console.log(e.response);
     dispatch({
       payload: e?.response?.data?.message,
       type: GET_ORDERS_FAILED,
+    });
+  }
+};
+
+export const getOrderById = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: GET_ORDER_START,
+    });
+    const state = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.userDetails.user.token}`,
+      },
+    };
+
+    const response = await axios.get(`/orders/${id}`, config);
+
+    dispatch({
+      type: GET_ORDER_SUCCESS,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({
+      payload: e?.response?.data?.message,
+      type: GET_ORDER_FAILED,
     });
   }
 };

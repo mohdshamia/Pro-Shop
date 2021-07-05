@@ -12,7 +12,6 @@ import Button from "../../../Components/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { placeOrder } from "../../../Redux/Orders/ordersActions";
 import { useHistory } from "react-router";
-import { useEffect } from "react";
 
 function PlaceOrderComponent() {
   const state = useSelector((state) => state);

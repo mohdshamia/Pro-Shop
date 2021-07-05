@@ -13,6 +13,12 @@ export const CardContainer = styled(FlexColumn)`
   color: #000000;
 
   ${(props) => (props.widthBorder ? "box-shadow: 0px 2px 20px #08091E1A;" : "")}
+
+  @media screen and (max-width: 1100px) {
+    width: 90%;
+    height: 440px;
+    margin-bottom: 30px;
+  }
 `;
 
 export const CardLink = styled(Link)`

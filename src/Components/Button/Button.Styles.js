@@ -23,4 +23,9 @@ export const CustomeButton = styled(Link)`
         cursor: none;
   `
       : ""}
+
+  @media screen and (max-width: 1100px) {
+    font-size: 16px;
+    height: 40px;
+  }
 `;

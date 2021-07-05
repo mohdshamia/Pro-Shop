@@ -42,22 +42,6 @@ function ProductCard(props) {
       </CardLink>
       <FlexRow>
         <Button
-          text={
-            <BookmarkBorderIcon
-              style={{
-                fontSize: 40,
-                color: "#242424",
-                fill: "#242424",
-                opacity: 0.3,
-              }}
-            />
-          }
-          width={"54px"}
-          borderRadius={10}
-          isGray={true}
-          style={{ height: 62, marginRight: 13 }}
-        />
-        <Button
           disabled={props.product.countInStock}
           text="Add to cart"
           width={"324px"}

@@ -21,7 +21,7 @@ const styles = {
   root: {
     position: "relative",
     width: "100%",
-    height: 678,
+    height: window.innerWidth > 1100 ? 678 : 800,
   },
 };
 

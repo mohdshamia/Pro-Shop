@@ -21,6 +21,10 @@ export const Typography = styled("p")`
   font-size: ${(props) => props.fontSize}px;
   color: ${(props) => props.color};
   font-weight: ${(props) => props.fontWeight};
+
+  @media screen and (max-width: 1100px) {
+    font-size: ${(props) => props.fontSize - 6}px;
+  }
 `;
 
 export const Hr = styled("div")`
@@ -52,6 +56,9 @@ export const InnerSection = styled(FlexColumn)`
   max-width: 1640px;
   width: 100%;
   margin: 0 auto;
+  @media screen and (max-width: 1100px) {
+    padding: 0 20px;
+  }
 `;
 
 export const SpinnerContainer = styled.div`

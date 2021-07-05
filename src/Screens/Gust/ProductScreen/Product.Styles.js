@@ -52,3 +52,12 @@ export const FlexColWhite = styled(FlexColumn)`
   border: 1px solid #bcbcbc;
   padding: 0 51px 15px 51px;
 `;
+
+export const StyledTextArea = styled.textarea`
+  width: 100%;
+  height: 120px;
+  margin: 20px 0;
+  padding: 20px;
+
+  resize: vertical;
+`;

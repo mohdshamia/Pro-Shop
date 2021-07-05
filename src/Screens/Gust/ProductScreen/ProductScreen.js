@@ -11,6 +11,7 @@ import {
   RIcon,
   SpecificationContainer,
   StyledFlexColumn,
+  StyledTextArea,
 } from "./Product.Styles";
 import RemoveIcon from "@material-ui/icons/Remove";
 import FeaturedProductsSection from "../HomeScreen/FeaturedProductsSection";
@@ -27,9 +28,12 @@ import Review from "../../../Components/Review/Review";
 import { useParams } from "react-router";
 import Navigator from "../../../Components/Navigator/Navigator";
 import { addCartItem } from "../../../Redux/Cart/cartActions";
+import { ErrorMessage } from "../../User/Payment/Payment.Styles";
 
 function ProductScreen(props) {
   const [count, setCount] = useState(1);
+  const [review, setReview] = useState("");
+  const [error, setError] = useState("");
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
   const params = useParams();
@@ -173,27 +177,54 @@ function ProductScreen(props) {
           <FlexColumn
             style={{ margin: "63px 0 0 0", alignItems: "flex-start" }}
           >
-            {product.product?.reviews?.length > 0 && (
-              <FlexColumn style={{ alignItems: "flex-start" }}>
+            <FlexColumn style={{ alignItems: "flex-start" }}>
+              <Typography
+                fontSize="32"
+                fontWeight="700"
+                style={{ margin: "60px 0 30px", justifyContent: "start" }}
+              >
+                Reviews
+              </Typography>
+
+              <FlexColWhite>
                 <Typography
-                  fontSize="32"
-                  fontWeight="700"
-                  style={{ margin: "60px 0 30px", justifyContent: "start" }}
+                  fontSize="22"
+                  fontWeight="500"
+                  style={{ margin: "30px 0 30px", justifyContent: "start" }}
                 >
-                  Reviews
+                  Add Review
                 </Typography>
-                <FlexColWhite>
-                  {product.product?.reviews?.map((item) => (
-                    <Review
-                      title={item.name}
-                      text={item.comment}
-                      date={item.createdAt}
-                      rate={item.rating}
-                    />
-                  ))}
-                </FlexColWhite>
-              </FlexColumn>
-            )}
+                <StyledTextArea
+                  type="text"
+                  placeholder={"Comment..."}
+                  required={true}
+                  onChange={(e) => setReview(e.target.value)}
+                  value={review}
+                />
+                {error && <ErrorMessage>{error}</ErrorMessage>}
+                <FlexRow style={{ justifyContent: "start" }}>
+                  <Button
+                    text={"Submit"}
+                    onClick={() => {
+                      if (review) {
+                        setError("");
+                        setReview("");
+                      } else setError("Please write a comment");
+                    }}
+                    isLoading={false}
+                    borderRadius={10}
+                  />
+                </FlexRow>
+                {product.product?.reviews?.map((item) => (
+                  <Review
+                    title={item.name}
+                    text={item.comment}
+                    date={item.createdAt}
+                    rate={item.rating}
+                  />
+                ))}
+              </FlexColWhite>
+            </FlexColumn>
           </FlexColumn>
         </HeroSection>
       </SpecificationContainer>

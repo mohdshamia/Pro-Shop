@@ -79,7 +79,11 @@ function CartScreen(props) {
 
           <Button
             text={"Proceed to checkout"}
-            link={"/proceed-checkout/shipping-address"}
+            link={
+              state.userDetails.user._id
+                ? "/proceed-checkout/shipping-address"
+                : "/login"
+            }
             borderRadius={10}
             width={"100%"}
           />

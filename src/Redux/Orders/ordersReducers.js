@@ -1,4 +1,7 @@
 import {
+  GET_ORDER_FAILED,
+  GET_ORDER_START,
+  GET_ORDER_SUCCESS,
   GET_ORDERS_FAILED,
   GET_ORDERS_START,
   GET_ORDERS_SUCCESS,
@@ -19,6 +22,12 @@ export const ordersReducers = (
       isLoading: false,
       error: "",
       orders: [],
+    },
+    userOrder: {
+      success: false,
+      isLoading: true,
+      error: "",
+      order: {},
     },
   },
   action
@@ -81,6 +90,40 @@ export const ordersReducers = (
           isLoading: false,
           error: action.payload,
           orders: [],
+        },
+      };
+
+    /** Get order by id cases*/
+    case GET_ORDER_START:
+      return {
+        ...initialState,
+        userOrder: {
+          success: false,
+          isLoading: true,
+          error: "",
+          order: {},
+        },
+      };
+
+    case GET_ORDER_SUCCESS:
+      return {
+        ...initialState,
+        userOrder: {
+          success: true,
+          isLoading: false,
+          error: false,
+          order: action.payload,
+        },
+      };
+
+    case GET_ORDER_FAILED:
+      return {
+        ...initialState,
+        userOrder: {
+          success: false,
+          isLoading: false,
+          error: action.payload,
+          order: {},
         },
       };
 

@@ -7,7 +7,6 @@ import {
 } from "../../../Global.Styles";
 import { BorderedBox, Divider, YellowDivider } from "./HomeScreen.Styles";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
-import slideImage from "../../../Assets/img1.PNG";
 
 function TopRatedSection({ topRatedProducts }) {
   return (

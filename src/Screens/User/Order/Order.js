@@ -1,18 +1,37 @@
-import { FlexRow, InnerSection, Typography } from "../../../Global.Styles";
+import {
+  FlexRow,
+  InnerSection,
+  SpinnerContainer,
+  Typography,
+} from "../../../Global.Styles";
 import {
   ErrorMessage,
   OrderDetail,
   OrderDetails,
   Shipping,
   ShippingAddress,
+  Order as StyledOrder,
 } from "../Payment/Payment.Styles";
 import OrderCard from "../../../Components/OrderCard/OrderCard";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getOrderById } from "../../../Redux/Orders/ordersActions";
 
 function Order(props) {
   const state = useSelector((state) => state);
+  const dispatch = useDispatch();
 
-  return (
+  useEffect(() => {
+    dispatch(getOrderById(props.match.params.id));
+  }, [dispatch, props.match.params.id]);
+
+  console.log(state);
+
+  return state.orders.userOrder.isLoading ? (
+    <SpinnerContainer />
+  ) : state.orders.userOrder.error ? (
+    <ErrorMessage>{state.orders.userOrder.error}</ErrorMessage>
+  ) : (
     <InnerSection style={{ margin: "44px 0 60px", alignItems: "flex-start" }}>
       <Typography
         style={{ justifyContent: "start" }}
@@ -60,8 +79,8 @@ function Order(props) {
                 justifyContent: "start",
               }}
             >
-              {state.cart.shippingAddress.country}-
-              {state.cart.shippingAddress.city}
+              {state.orders.userOrder.order.shippingAddress.country}-
+              {state.orders.userOrder.order.shippingAddress.city}
             </Typography>
           </ShippingAddress>
           <OrderDetail>
@@ -78,13 +97,13 @@ function Order(props) {
               </Typography>
             </FlexRow>
             {/* Order Items */}
-            {state.cart?.cart?.map((i) => (
+            {state.orders?.userOrder?.order?.orderItems?.map((i) => (
               <OrderCard
                 key={i._id}
                 src={"https://proshop-ms.herokuapp.com/" + i.image}
                 orderName={i.name}
-                orderNumber={i.quantity}
-                subTotal={i.price * i.quantity}
+                orderNumber={i.qty}
+                subTotal={i.price * i.qty}
                 price={i.price}
               />
             ))}
@@ -92,7 +111,7 @@ function Order(props) {
         </Shipping>
 
         {/* Right Side */}
-        <Order>
+        <StyledOrder>
           <OrderDetails>
             <Typography
               fontSize={"32"}
@@ -108,8 +127,8 @@ function Order(props) {
               </Typography>
               <Typography style={{ justifyContent: "start" }} color={"#707070"}>
                 $
-                {state.cart.cart
-                  .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                {state.orders?.userOrder?.order?.orderItems
+                  .reduce((acc, item) => acc + item.price * item.qty, 0)
                   .toFixed(2)}
               </Typography>
             </FlexRow>
@@ -135,17 +154,13 @@ function Order(props) {
                 fontWeight={"bold"}
               >
                 $
-                {state.cart?.cart
-                  .reduce((acc, item) => acc + item.price * item.quantity, 0)
+                {state.orders?.userOrder?.order?.orderItems
+                  .reduce((acc, item) => acc + item.price * item.qty, 0)
                   .toFixed(2)}
               </Typography>
             </FlexRow>
           </OrderDetails>
-
-          {state.orders.placeOrder.error && (
-            <ErrorMessage>{state.orders.placeOrder.error}</ErrorMessage>
-          )}
-        </Order>
+        </StyledOrder>
         {/* Place an order content */}
       </FlexRow>
     </InnerSection>

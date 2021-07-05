@@ -20,7 +20,7 @@ function FeaturedProductsSection({ products }) {
   const [sliderIndex, setSliderIndex] = useState(0);
   //                 Desktop>1100                  Tablet>800 & <1100             Mobile <800
   const chunkSize =
-    window.innerWidth > 1100 ? 3 : window.innerWidth > 800 ? 2 : 1;
+    window.innerWidth > 1100 ? 3 : window.innerWidth > 1100 ? 2 : 1;
 
   const handleChangeIndex = () => {};
 
