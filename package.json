@@ -1,7 +1,6 @@
 {
   "name": "pro-shop",
   "version": "0.1.0",
-  "proxy": "https://proshop-ms.herokuapp.com/api",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.4",

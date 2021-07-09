@@ -14,6 +14,7 @@ import {
   USER_UPDATE_PROFILE_SUCCESS,
 } from "./userTypesConstants";
 import axios from "axios";
+import API_URL from "../../Api";
 
 export const loginAction = (values, history) => {
   return async (dispatch) => {
@@ -22,7 +23,7 @@ export const loginAction = (values, history) => {
     });
 
     try {
-      const response = await axios.post("/users/login", values);
+      const response = await axios.post(`${API_URL}/users/login`, values);
       console.log(response);
 
       // Set user to localStorage
@@ -51,7 +52,7 @@ export const registerAction = (values, history) => {
     });
 
     try {
-      const response = await axios.post("/users", values);
+      const response = await axios.post(`${API_URL}/users`, values);
 
       // Set user to localStorage
       localStorage.setItem("user", JSON.stringify(response.data));
@@ -87,7 +88,7 @@ export const getProfileAction = () => {
     } = state;
 
     try {
-      const response = await axios.get("/users/profile", {
+      const response = await axios.get(`${API_URL}/users/profile`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -123,7 +124,7 @@ export const updateProfileAction = (values, history) => {
     } = state;
 
     try {
-      const response = await axios.put("/users/profile", values, {
+      const response = await axios.put(`${API_URL}/users/profile`, values, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,

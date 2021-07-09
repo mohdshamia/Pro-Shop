@@ -10,6 +10,7 @@ import {
   GET_SLIDER_IMAGES_SUCCESS,
 } from "./guestTypes";
 import axios from "axios";
+import API_URL from "../../Api";
 
 export const getSliderImages = () => async (dispatch) => {
   dispatch({
@@ -17,7 +18,7 @@ export const getSliderImages = () => async (dispatch) => {
   });
 
   try {
-    const response = await axios.get("/products/top");
+    const response = await axios.get(`${API_URL}/products/top`);
 
     dispatch({
       type: GET_SLIDER_IMAGES_SUCCESS,
@@ -37,7 +38,7 @@ export const getFeaturedProducts = () => async (dispatch) => {
   });
 
   try {
-    const response = await axios.get("/products");
+    const response = await axios.get(`${API_URL}/products`);
 
     dispatch({
       type: GET_FEATURED_PRODUCTS_SUCCESS,
@@ -57,7 +58,7 @@ export const getProduct = (id) => async (dispatch) => {
   });
 
   try {
-    const response = await axios.get("/products/" + id);
+    const response = await axios.get(`${API_URL}/products/${id}`);
 
     dispatch({
       type: GET_PRODUCT_BY_ID_SUCCESS,

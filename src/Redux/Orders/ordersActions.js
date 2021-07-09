@@ -11,6 +11,7 @@ import {
   PLACE_ORDER_SUCCESS,
 } from "./ordersTypesConstants";
 import { RESET_CART } from "../Cart/cartTypesConstants";
+import API_URL from "../../Api";
 
 export const placeOrder = (history) => async (dispatch, getState) => {
   try {
@@ -35,7 +36,7 @@ export const placeOrder = (history) => async (dispatch, getState) => {
       },
     };
 
-    const response = await axios.post("/orders", requestData, config);
+    const response = await axios.post(`${API_URL}/orders`, requestData, config);
 
     dispatch({
       type: PLACE_ORDER_SUCCESS,
@@ -72,7 +73,7 @@ export const getOrders = () => async (dispatch, getState) => {
       },
     };
 
-    const response = await axios.get("/orders", config);
+    const response = await axios.get(`${API_URL}/orders/myorders`, config);
 
     dispatch({
       type: GET_ORDERS_SUCCESS,
@@ -100,7 +101,7 @@ export const getOrderById = (id) => async (dispatch, getState) => {
       },
     };
 
-    const response = await axios.get(`/orders/${id}`, config);
+    const response = await axios.get(`${API_URL}/orders/${id}`, config);
 
     dispatch({
       type: GET_ORDER_SUCCESS,
