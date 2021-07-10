@@ -8,9 +8,10 @@ import {
 } from "../../../Components/FormInput/FormInput.Styles";
 import { Form, Formik } from "formik";
 import { loginSchema } from "../../../Valedation";
-import { useHistory } from "react-router";
+import { useHistory, useLocation } from "react-router";
 import { loginAction } from "../../../Redux/User/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocationWithQuery } from "react-router-query-hooks";
 
 function Login() {
   const history = useHistory();
@@ -18,9 +19,19 @@ function Login() {
   const state = useSelector((store) => store);
   const error = state.userDetails.error;
   const isLoading = state.userDetails.isLoading;
+  const locationQuery = useLocationWithQuery();
+  const {
+    query: { pathname, review, rating },
+  } = locationQuery;
 
   const handleSaveChanges = async (values) => {
-    dispatch(loginAction(values, history));
+    dispatch(
+      loginAction(
+        values,
+        history,
+        pathname ? `${pathname}?review=${review}&rating=${rating}` : ""
+      )
+    );
   };
 
   return (

@@ -1,4 +1,7 @@
 import {
+  ADD_REVIEW_FAILED,
+  ADD_REVIEW_START,
+  ADD_REVIEW_SUCCESS,
   USER_GET_PROFILE_FAILED,
   USER_GET_PROFILE_START,
   USER_GET_PROFILE_SUCCESS,
@@ -16,7 +19,7 @@ import {
 import axios from "axios";
 import API_URL from "../../Api";
 
-export const loginAction = (values, history) => {
+export const loginAction = (values, history, pathname) => {
   return async (dispatch) => {
     dispatch({
       type: USER_LOGIN_START,
@@ -24,7 +27,6 @@ export const loginAction = (values, history) => {
 
     try {
       const response = await axios.post(`${API_URL}/users/login`, values);
-      console.log(response);
 
       // Set user to localStorage
       localStorage.setItem("user", JSON.stringify(response.data));
@@ -34,11 +36,10 @@ export const loginAction = (values, history) => {
         type: USER_LOGIN_SUCCESS,
       });
 
-      history.push("/");
+      history.push(pathname ? pathname : "/");
     } catch (e) {
-      console.log(e.response);
       dispatch({
-        payload: e.response.data.message,
+        payload: e?.response?.data?.message,
         type: USER_LOGIN_FAILED,
       });
     }
@@ -64,7 +65,6 @@ export const registerAction = (values, history) => {
 
       history.push("/");
     } catch (e) {
-      console.log(e.response);
       dispatch({
         payload: e.response.data.message,
         type: USER_REGISTER_FAILED,
@@ -100,7 +100,6 @@ export const getProfileAction = () => {
         type: USER_GET_PROFILE_SUCCESS,
       });
     } catch (e) {
-      console.log(e.response);
       dispatch({
         payload: e?.response?.data?.message,
         type: USER_GET_PROFILE_FAILED,
@@ -141,10 +140,48 @@ export const updateProfileAction = (values, history) => {
 
       history.push("/profile");
     } catch (e) {
-      console.log(e.response);
       dispatch({
         payload: e?.response?.data?.message,
         type: USER_UPDATE_PROFILE_FAILED,
+      });
+    }
+  };
+};
+
+export const addReviewAction = (values, id) => {
+  return async (dispatch, getState) => {
+    dispatch({
+      type: ADD_REVIEW_START,
+    });
+
+    const state = getState();
+
+    const {
+      userDetails: {
+        user: { token },
+      },
+    } = state;
+
+    try {
+      const response = await axios.post(
+        `${API_URL}/products/${id}/reviews`,
+        values,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      dispatch({
+        payload: response.data.message,
+        type: ADD_REVIEW_SUCCESS,
+      });
+    } catch (e) {
+      dispatch({
+        payload: e?.response?.data?.message,
+        type: ADD_REVIEW_FAILED,
       });
     }
   };

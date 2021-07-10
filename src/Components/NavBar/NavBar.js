@@ -21,6 +21,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../Redux/User/userActions";
 import { MenuOutlined } from "@material-ui/icons";
+import { useHistory } from "react-router";
 
 export default function Navbar() {
   const Style = {
@@ -32,6 +33,7 @@ export default function Navbar() {
   const [value, setValue] = useState("");
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const state = useSelector((state) => state);
 
@@ -126,7 +128,11 @@ export default function Navbar() {
               placeholder="Search"
               onChange={(e) => setValue(e.target.value)}
             />
-            <ButtonNav>
+            <ButtonNav
+              onClick={() => {
+                history.push(`/search${value ? `?keyword=${value}` : ""}`);
+              }}
+            >
               <SearchIconNav />
               search
             </ButtonNav>

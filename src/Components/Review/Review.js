@@ -17,8 +17,8 @@ export default function Review({ title, text, rate, icon, date }) {
     >
       <ReviewTitle>{title}</ReviewTitle>
       <RateBox>
-        <Rating name="simple-controlled" value={rate} />
-        <TextReviewDate>{date}</TextReviewDate>
+        <Rating readOnly name="simple-controlled" value={rate} />
+        <TextReviewDate>{date.substring(0, 10)}</TextReviewDate>
       </RateBox>
       <TextReviewDescription>{text}</TextReviewDescription>
     </FlexColumn>

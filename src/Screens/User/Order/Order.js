@@ -25,8 +25,6 @@ function Order(props) {
     dispatch(getOrderById(props.match.params.id));
   }, [dispatch, props.match.params.id]);
 
-  console.log(state);
-
   return state.orders.userOrder.isLoading ? (
     <SpinnerContainer />
   ) : state.orders.userOrder.error ? (

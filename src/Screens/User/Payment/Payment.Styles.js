@@ -141,5 +141,11 @@ export const ErrorMessage = styled(FlexRow)`
   background: #e8c4c4;
   padding: 10px 30px;
   margin-top: 20px;
+  margin-bottom: 10px;
   border-radius: 16px;
+`;
+
+export const SuccessMessage = styled(ErrorMessage)`
+  color: green;
+  background: lightgreen;
 `;

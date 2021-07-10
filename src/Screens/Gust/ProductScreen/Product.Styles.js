@@ -1,5 +1,10 @@
 import styled from "styled-components";
-import { FlexColumn, InnerSection, Typography } from "../../../Global.Styles";
+import {
+  FlexColumn,
+  FlexRow,
+  InnerSection,
+  Typography,
+} from "../../../Global.Styles";
 
 export const SpecificationContainer = styled(InnerSection)`
   display: flex;
@@ -60,4 +65,28 @@ export const StyledTextArea = styled.textarea`
   padding: 20px;
 
   resize: vertical;
+`;
+
+export const CardsBox = styled(FlexRow)`
+  justify-content: start;
+  align-items: start;
+  flex-wrap: wrap;
+  width: 90vw;
+  max-width: 1800px;
+  @media screen and (max-width: 1100px) {
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const LoadMore = styled(FlexRow)`
+  width: 200px;
+  height: 50px;
+  font-size: 18px;
+  background: ${(props) => (props.isLoading ? "#ddd" : "#fcdd06")};
+  color: #fff;
+  border-radius: 21px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  margin: 0 auto;
 `;

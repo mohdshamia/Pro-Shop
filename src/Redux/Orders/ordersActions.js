@@ -51,7 +51,6 @@ export const placeOrder = (history) => async (dispatch, getState) => {
 
     history.push("/order/" + response.data._id);
   } catch (e) {
-    console.log(e.response);
     dispatch({
       payload: e?.response?.data?.message,
       type: PLACE_ORDER_FAILED,

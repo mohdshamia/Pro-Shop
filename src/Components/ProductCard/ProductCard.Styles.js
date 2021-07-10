@@ -16,7 +16,6 @@ export const CardContainer = styled(FlexColumn)`
 
   @media screen and (max-width: 1100px) {
     width: 90%;
-    height: 440px;
     margin-bottom: 30px;
   }
 `;

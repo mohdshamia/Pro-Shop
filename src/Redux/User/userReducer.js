@@ -12,6 +12,10 @@ import {
   USER_UPDATE_PROFILE_FAILED,
   USER_UPDATE_PROFILE_START,
   USER_UPDATE_PROFILE_SUCCESS,
+  ADD_REVIEW_START,
+  ADD_REVIEW_SUCCESS,
+  ADD_REVIEW_FAILED,
+  ADD_REVIEW_RESET,
 } from "./userTypesConstants";
 
 export const userReducer = (
@@ -24,6 +28,11 @@ export const userReducer = (
     },
     userProfile: {
       user: {},
+    },
+    addingReview: {
+      success: false,
+      isLoading: false,
+      error: "",
     },
     success: false,
     isLoading: false,
@@ -127,6 +136,43 @@ export const userReducer = (
 
         userProfile: {
           error: action.payload,
+          isLoading: false,
+        },
+      };
+
+    /** Add Reviews cases */
+    case ADD_REVIEW_START:
+      return {
+        ...initialState,
+        addingReview: {
+          isLoading: true,
+        },
+      };
+
+    case ADD_REVIEW_SUCCESS:
+      return {
+        ...initialState,
+        addingReview: {
+          isLoading: false,
+          success: action.payload,
+        },
+      };
+
+    case ADD_REVIEW_FAILED:
+      return {
+        ...initialState,
+        addingReview: {
+          error: action.payload,
+          isLoading: false,
+        },
+      };
+
+    case ADD_REVIEW_RESET:
+      return {
+        ...initialState,
+        addingReview: {
+          error: "",
+          success: "",
           isLoading: false,
         },
       };

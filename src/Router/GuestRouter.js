@@ -3,6 +3,7 @@ import { Route } from "react-router";
 import HomeScreen from "../Screens/Gust/HomeScreen/HomeScreen";
 import ProductScreen from "../Screens/Gust/ProductScreen/ProductScreen";
 import CartScreen from "../Screens/User/CartScreen/CartScreen";
+import SearchScreen from "../Screens/Gust/SearchScreen/SearchScreen";
 
 function GuestRouter(props) {
   return [
@@ -13,6 +14,7 @@ function GuestRouter(props) {
       component={ProductScreen}
     />,
     <Route key={3} path={"/cart"} exact={true} component={CartScreen} />,
+    <Route key={9874} path={"/search"} exact={true} component={SearchScreen} />,
   ];
 }
 
