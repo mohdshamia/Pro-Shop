@@ -1,6 +1,5 @@
 import {
   FlexColumn,
-  FlexRow,
   InnerSection,
   SpinnerContainer,
   Typography,

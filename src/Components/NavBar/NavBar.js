@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logoutAction } from "../../Redux/User/userActions";
 import { MenuOutlined } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import { useLocationWithQuery } from "react-router-query-hooks";
 
 export default function Navbar() {
   const Style = {
@@ -30,7 +31,11 @@ export default function Navbar() {
     fill: "#FFF",
     margin: "auto 0 10px 0",
   };
-  const [value, setValue] = useState("");
+  const locationQuery = useLocationWithQuery();
+  const {
+    query: { keyword },
+  } = locationQuery;
+  const [value, setValue] = useState(keyword ? keyword : "");
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();

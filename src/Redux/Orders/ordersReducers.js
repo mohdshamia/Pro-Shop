@@ -5,6 +5,9 @@ import {
   GET_ORDERS_FAILED,
   GET_ORDERS_START,
   GET_ORDERS_SUCCESS,
+  PAY_ORDER_FAILED,
+  PAY_ORDER_START,
+  PAY_ORDER_SUCCESS,
   PLACE_ORDER_FAILED,
   PLACE_ORDER_START,
   PLACE_ORDER_SUCCESS,
@@ -13,6 +16,11 @@ import {
 export const ordersReducers = (
   initialState = {
     placeOrder: {
+      success: "",
+      isLoading: false,
+      error: "",
+    },
+    payOrder: {
       success: "",
       isLoading: false,
       error: "",
@@ -124,6 +132,37 @@ export const ordersReducers = (
           isLoading: false,
           error: action.payload,
           order: {},
+        },
+      };
+
+    /** Get order by id cases*/
+    case PAY_ORDER_START:
+      return {
+        ...initialState,
+        payOrder: {
+          success: false,
+          isLoading: true,
+          error: "",
+        },
+      };
+
+    case PAY_ORDER_SUCCESS:
+      return {
+        ...initialState,
+        payOrder: {
+          success: true,
+          isLoading: false,
+          error: false,
+        },
+      };
+
+    case PAY_ORDER_FAILED:
+      return {
+        ...initialState,
+        payOrder: {
+          success: false,
+          isLoading: false,
+          error: action.payload,
         },
       };
 

@@ -11,11 +11,13 @@ import {
   Shipping,
   ShippingAddress,
   Order as StyledOrder,
+  SuccessMessage,
 } from "../Payment/Payment.Styles";
 import OrderCard from "../../../Components/OrderCard/OrderCard";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getOrderById } from "../../../Redux/Orders/ordersActions";
+import { getOrderById, payOrder } from "../../../Redux/Orders/ordersActions";
+import { PayPalButton } from "react-paypal-button-v2";
 
 function Order(props) {
   const state = useSelector((state) => state);
@@ -23,7 +25,7 @@ function Order(props) {
 
   useEffect(() => {
     dispatch(getOrderById(props.match.params.id));
-  }, [dispatch, props.match.params.id]);
+  }, [dispatch, props.match.params.id, state.orders.payOrder.success]);
 
   return state.orders.userOrder.isLoading ? (
     <SpinnerContainer />
@@ -80,6 +82,16 @@ function Order(props) {
               {state.orders.userOrder.order.shippingAddress.country}-
               {state.orders.userOrder.order.shippingAddress.city}
             </Typography>
+            {state.orders.userOrder.order.isPaid ? (
+              <SuccessMessage>Paid!</SuccessMessage>
+            ) : (
+              <ErrorMessage>Not Paid</ErrorMessage>
+            )}
+            {state.orders.userOrder.order.isDelivered ? (
+              <SuccessMessage>Delivered!</SuccessMessage>
+            ) : (
+              <ErrorMessage>Not Delivered</ErrorMessage>
+            )}
           </ShippingAddress>
           <OrderDetail>
             <FlexRow
@@ -158,6 +170,39 @@ function Order(props) {
               </Typography>
             </FlexRow>
           </OrderDetails>
+          {!state.orders.userOrder.order.isPaid && (
+            <FlexRow style={{ width: "100%", margin: "40px auto" }}>
+              <PayPalButton
+                amount={state.orders?.userOrder?.order?.orderItems
+                  .reduce((acc, item) => acc + item.price * item.qty, 0)
+                  .toFixed(2)}
+                // shippingPreference="NO_SHIPPING" // default is "GET_FROM_FILE"
+                onSuccess={(details, data) => {
+                  alert(
+                    "Transaction completed by " + details.payer.name.given_name
+                  );
+
+                  // OPTIONAL: Call your server to save the transaction
+                  dispatch(
+                    payOrder(props.match.params.id, {
+                      email_address: details.payer.email_address,
+                      status: details.status,
+                      create_time: details.create_time,
+                      update_time: details.update_time,
+                      id: details.id,
+                    })
+                  );
+                }}
+                onError={(error) => {
+                  console.log(error);
+                }}
+                options={{
+                  clientId:
+                    "ATx8Na-9swFrVwvoIGlZWfw7-CJoXi4QaatMLp7pMMv0y8fEu49zwf6AYBnmdNLxS3G7i2gAhx5g4l0K",
+                }}
+              />
+            </FlexRow>
+          )}
         </StyledOrder>
         {/* Place an order content */}
       </FlexRow>

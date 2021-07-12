@@ -1,9 +1,14 @@
-import React from "react";
+import { lazy } from "react";
 import { Route } from "react-router";
-import HomeScreen from "../Screens/Gust/HomeScreen/HomeScreen";
-import ProductScreen from "../Screens/Gust/ProductScreen/ProductScreen";
-import CartScreen from "../Screens/User/CartScreen/CartScreen";
-import SearchScreen from "../Screens/Gust/SearchScreen/SearchScreen";
+
+const ProductScreen = lazy(() =>
+  import("../Screens/Gust/ProductScreen/ProductScreen")
+);
+const HomeScreen = lazy(() => import("../Screens/Gust/HomeScreen/HomeScreen"));
+const CartScreen = lazy(() => import("../Screens/User/CartScreen/CartScreen"));
+const SearchScreen = lazy(() =>
+  import("../Screens/Gust/SearchScreen/SearchScreen")
+);
 
 function GuestRouter(props) {
   return [

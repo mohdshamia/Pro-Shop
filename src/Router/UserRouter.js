@@ -1,10 +1,15 @@
-import React from "react";
+import React, { lazy } from "react";
 import { Route } from "react-router";
-import Order from "../Screens/User/Order/Order";
-import Orders from "../Screens/User/Orders/Orders";
-import ProfileScreen from "../Screens/User/ProfileScreen/ProfileScreen";
-import Payment from "../Screens/User/Payment/Payment";
-import UpdateProfileScreen from "../Screens/User/UpdateProfileScreen/UpdateProfileScreen";
+
+const ProfileScreen = lazy(() =>
+  import("../Screens/User/ProfileScreen/ProfileScreen")
+);
+const Order = lazy(() => import("../Screens/User/Order/Order"));
+const Orders = lazy(() => import("../Screens/User/Orders/Orders"));
+const Payment = lazy(() => import("../Screens/User/Payment/Payment"));
+const UpdateProfileScreen = lazy(() =>
+  import("../Screens/User/UpdateProfileScreen/UpdateProfileScreen")
+);
 
 function UserRouter(props) {
   return [

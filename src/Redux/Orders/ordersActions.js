@@ -6,6 +6,9 @@ import {
   GET_ORDERS_FAILED,
   GET_ORDERS_START,
   GET_ORDERS_SUCCESS,
+  PAY_ORDER_FAILED,
+  PAY_ORDER_START,
+  PAY_ORDER_SUCCESS,
   PLACE_ORDER_FAILED,
   PLACE_ORDER_START,
   PLACE_ORDER_SUCCESS,
@@ -110,6 +113,38 @@ export const getOrderById = (id) => async (dispatch, getState) => {
     dispatch({
       payload: e?.response?.data?.message,
       type: GET_ORDER_FAILED,
+    });
+  }
+};
+
+export const payOrder = (id, paymentResults) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: PAY_ORDER_START,
+    });
+    const state = getState();
+
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${state.userDetails.user.token}`,
+      },
+    };
+
+    const response = await axios.put(
+      `${API_URL}/orders/${id}/pay`,
+      paymentResults,
+      config
+    );
+
+    dispatch({
+      type: PAY_ORDER_SUCCESS,
+      payload: response.data,
+    });
+  } catch (e) {
+    dispatch({
+      payload: e?.response?.data?.message,
+      type: PAY_ORDER_FAILED,
     });
   }
 };

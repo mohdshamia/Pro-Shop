@@ -1,6 +1,8 @@
 import { Route } from "react-router";
-import Login from "../Screens/Auth/Login/Login";
-import Register from "../Screens/Auth/Register/Register";
+import { lazy } from "react";
+
+const Login = lazy(() => import("../Screens/Auth/Login/Login"));
+const Register = lazy(() => import("../Screens/Auth/Register/Register"));
 
 function AuthRouter(props) {
   return [
