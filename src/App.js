@@ -18,7 +18,6 @@ function App() {
           <NavBar />
           <Switch>
             {GuestRouter()}
-            {/** Make it protected*/}
             {state.userDetails.user._id ? UserRouter() : AuthRouter()}
             <Route key={60} path={"*"}>
               <NotFoundScreen />
