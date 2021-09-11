@@ -4,12 +4,14 @@ import thunk from "redux-thunk";
 import { guestReducers } from "./Guest/guestReducers";
 import { cartReducer } from "./Cart/cartReducer";
 import { ordersReducers } from "./Orders/ordersReducers";
+import { adminReducers } from "./Admin/reducers";
 
 const reducers = combineReducers({
   userDetails: userReducer,
   guestState: guestReducers,
   cart: cartReducer,
   orders: ordersReducers,
+  admin: adminReducers,
 });
 
 const userFromLocalStorage = JSON.parse(localStorage.getItem("user")) || {};

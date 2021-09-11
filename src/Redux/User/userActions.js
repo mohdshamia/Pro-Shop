@@ -73,7 +73,7 @@ export const registerAction = (values, history) => {
   };
 };
 
-export const getProfileAction = () => {
+export const getProfileAction = (id = "") => {
   return async (dispatch, getState) => {
     dispatch({
       type: USER_GET_PROFILE_START,
@@ -88,12 +88,15 @@ export const getProfileAction = () => {
     } = state;
 
     try {
-      const response = await axios.get(`${API_URL}/users/profile`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.get(
+        `${API_URL}/users/${id ? id : "profile"}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       dispatch({
         payload: response.data,

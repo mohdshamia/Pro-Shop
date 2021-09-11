@@ -5,7 +5,7 @@ import { FlexRow, Typography } from "../../Global.Styles";
 import { RIcon } from "../../Screens/Gust/ProductScreen/Product.Styles";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
-import { CrossSpan } from "../../Screens/User/CartScreen/CartScreen.Styles";
+import { CrossSpan } from "../../Screens/User/Customer/CartScreen/CartScreen.Styles";
 
 function CartItem({
   counter,

@@ -41,6 +41,16 @@ export const updateProfileSchema = () => {
   });
 };
 
+export const updateUserProfileSchema = () => {
+  return yup.object({
+    name: yup.string().required("Please enter a name"),
+    email: yup
+      .string()
+      .email("Please enter a valid email")
+      .required("Please enter an email"),
+  });
+};
+
 export const ShippingSchema = () => {
   return yup.object({
     country: yup.string().required("Please enter country name"),

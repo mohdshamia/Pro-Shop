@@ -5,7 +5,9 @@ const ProductScreen = lazy(() =>
   import("../Screens/Gust/ProductScreen/ProductScreen")
 );
 const HomeScreen = lazy(() => import("../Screens/Gust/HomeScreen/HomeScreen"));
-const CartScreen = lazy(() => import("../Screens/User/CartScreen/CartScreen"));
+const CartScreen = lazy(() =>
+  import("../Screens/User/Customer/CartScreen/CartScreen")
+);
 const SearchScreen = lazy(() =>
   import("../Screens/Gust/SearchScreen/SearchScreen")
 );

@@ -6,11 +6,11 @@ import {
   Shipping,
   ShippingAddress,
 } from "./Payment.Styles";
-import { FlexRow, Typography } from "../../../Global.Styles";
-import OrderCard from "../../../Components/OrderCard/OrderCard";
-import Button from "../../../Components/Button/Button";
+import { FlexRow, Typography } from "../../../../Global.Styles";
+import OrderCard from "../../../../Components/OrderCard/OrderCard";
+import Button from "../../../../Components/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { placeOrder } from "../../../Redux/Orders/ordersActions";
+import { placeOrder } from "../../../../Redux/Orders/ordersActions";
 import { useHistory } from "react-router";
 
 function PlaceOrderComponent() {

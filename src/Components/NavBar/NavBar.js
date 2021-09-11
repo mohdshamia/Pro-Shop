@@ -143,6 +143,16 @@ export default function Navbar() {
             </ButtonNav>
           </NavBox>
           <StyledBox>
+            {state.userDetails.user.isAdmin && (
+              <>
+                <Icon to={"/users"}>
+                  <PersonIcon style={Style} />
+                  <Typography fontSize={"13px"} color={"#fff"}>
+                    Users
+                  </Typography>
+                </Icon>
+              </>
+            )}
             <Icon to={state.userDetails.user._id ? "/profile" : "/login"}>
               <PersonIcon style={Style} />
               {state.userDetails.user._id ? (

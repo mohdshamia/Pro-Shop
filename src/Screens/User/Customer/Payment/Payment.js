@@ -3,7 +3,7 @@ import {
   InnerSection,
   Line,
   Typography,
-} from "../../../Global.Styles";
+} from "../../../../Global.Styles";
 import { Num } from "./Payment.Styles";
 import PaymentComponent from "./PaymentComponent";
 import PlaceOrderComponent from "./PlaceOrderComponent";

@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexColumn, FlexRow, Typography } from "../../../Global.Styles";
+import { FlexColumn, FlexRow, Typography } from "../../../../Global.Styles";
 import {
   ChangeBtn,
   OrderDetails,
@@ -8,14 +8,14 @@ import {
   ShippingForm,
 } from "./Payment.Styles";
 import { Form, Formik } from "formik";
-import { ShippingSchema } from "../../../Valedation";
+import { ShippingSchema } from "../../../../Valedation";
 import {
   ErrorMsg,
   Input,
-} from "../../../Components/FormInput/FormInput.Styles";
-import Button from "../../../Components/Button/Button";
+} from "../../../../Components/FormInput/FormInput.Styles";
+import Button from "../../../../Components/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { addShippingAddress } from "../../../Redux/Cart/cartActions";
+import { addShippingAddress } from "../../../../Redux/Cart/cartActions";
 import { useHistory } from "react-router";
 
 function PaymentComponent(props) {

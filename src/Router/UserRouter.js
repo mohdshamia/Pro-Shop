@@ -1,17 +1,38 @@
-import React, { lazy } from "react";
+import { lazy } from "react";
 import { Route } from "react-router";
+import { useSelector } from "react-redux";
 
 const ProfileScreen = lazy(() =>
-  import("../Screens/User/ProfileScreen/ProfileScreen")
+  import("../Screens/User/Customer/ProfileScreen/ProfileScreen")
 );
-const Order = lazy(() => import("../Screens/User/Order/Order"));
-const Orders = lazy(() => import("../Screens/User/Orders/Orders"));
-const Payment = lazy(() => import("../Screens/User/Payment/Payment"));
+const Order = lazy(() => import("../Screens/User/Customer/Order/Order"));
+const Orders = lazy(() => import("../Screens/User/Customer/Orders/Orders"));
+const Payment = lazy(() => import("../Screens/User/Customer/Payment/Payment"));
+const Users = lazy(() => import("../Screens/User/Admin/Users/Users"));
+const UpdateUserScreen = lazy(() =>
+  import("../Screens/User/Admin/UpdateUserScreen/UpdateUserScreen")
+);
 const UpdateProfileScreen = lazy(() =>
-  import("../Screens/User/UpdateProfileScreen/UpdateProfileScreen")
+  import("../Screens/User/Customer/UpdateProfileScreen/UpdateProfileScreen")
 );
 
-function UserRouter(props) {
+function UserRouter() {
+  const state = useSelector((state) => state);
+
+  if (!state.userDetails.user._id) return [];
+
+  const adminRoutes = state.userDetails.user.isAdmin
+    ? [
+        <Route key={70} path={"/users"} exact={true} component={Users} />,
+        <Route
+          key={800}
+          path={"/edit-user/:id"}
+          exact={true}
+          component={UpdateUserScreen}
+        />,
+      ]
+    : [];
+
   return [
     <Route key={50} path={"/order/:id"} exact={true} component={Order} />,
     <Route key={2} path={"/orders"} exact={true} component={Orders} />,
@@ -34,6 +55,7 @@ function UserRouter(props) {
       exact={true}
       component={UpdateProfileScreen}
     />,
+    ...adminRoutes,
   ];
 }
 

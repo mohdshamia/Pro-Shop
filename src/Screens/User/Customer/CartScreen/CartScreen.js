@@ -4,19 +4,19 @@ import {
   InnerSection,
   SpinnerContainer,
   Typography,
-} from "../../../Global.Styles";
-import Navigator from "../../../Components/Navigator/Navigator";
+} from "../../../../Global.Styles";
+import Navigator from "../../../../Components/Navigator/Navigator";
 import { CartList, ProceedBox } from "./CartScreen.Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
-import CartItem from "../../../Components/CartItem/CartItem";
-import Button from "../../../Components/Button/Button";
+import CartItem from "../../../../Components/CartItem/CartItem";
+import Button from "../../../../Components/Button/Button";
 import {
   addCartItem,
   decreaseCartItemQty,
   deleteCartItem,
-} from "../../../Redux/Cart/cartActions";
-import Meta from "../../../Components/Meta/Meta";
+} from "../../../../Redux/Cart/cartActions";
+import Meta from "../../../../Components/Meta/Meta";
 
 function CartScreen(props) {
   const state = useSelector((state) => state);

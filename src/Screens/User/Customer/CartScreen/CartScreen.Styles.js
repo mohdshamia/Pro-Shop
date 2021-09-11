@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexColumn } from "../../../Global.Styles";
+import { FlexColumn } from "../../../../Global.Styles";
 
 export const CartList = styled(FlexColumn)`
   margin-right: 30px;

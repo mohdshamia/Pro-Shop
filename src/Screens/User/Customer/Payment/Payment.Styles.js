@@ -4,7 +4,7 @@ import {
   Typography,
   FlexColumn,
   FlexRow,
-} from "../../../Global.Styles";
+} from "../../../../Global.Styles";
 
 // Payment Success
 export const PaymentContainer = styled(InnerSection)`

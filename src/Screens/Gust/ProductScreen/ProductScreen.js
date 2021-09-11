@@ -31,7 +31,7 @@ import { addCartItem } from "../../../Redux/Cart/cartActions";
 import {
   ErrorMessage,
   SuccessMessage,
-} from "../../User/Payment/Payment.Styles";
+} from "../../User/Customer/Payment/Payment.Styles";
 import Rating from "@material-ui/lab/Rating";
 import { addReviewAction } from "../../../Redux/User/userActions";
 import {

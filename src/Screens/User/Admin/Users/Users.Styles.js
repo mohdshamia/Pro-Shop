@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FlexColumn, FlexRow } from "../../../Global.Styles";
+import { FlexColumn, FlexRow } from "../../../../Global.Styles";
 import { Link } from "react-router-dom";
 
 export const ListBox = styled(FlexColumn)`

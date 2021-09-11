@@ -2,39 +2,34 @@ import {
   InnerSection,
   SpinnerContainer,
   Typography,
-} from "../../../Global.Styles";
-import { GrayContainer } from "../ProfileScreen/ProfileScreen.Styles";
-import Button from "../../../Components/Button/Button";
+} from "../../../../Global.Styles";
+import Button from "../../../../Components/Button/Button";
 import { Form, Formik } from "formik";
-import { updateProfileSchema } from "../../../Valedation";
+import { updateUserProfileSchema } from "../../../../Valedation";
 import {
   ErrorMsg,
   Input,
-} from "../../../Components/FormInput/FormInput.Styles";
-import { useEffect, useState } from "react";
+} from "../../../../Components/FormInput/FormInput.Styles";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getProfileAction,
-  registerAction,
-  updateProfileAction,
-} from "../../../Redux/User/userActions";
-import { useHistory } from "react-router";
+import { getProfileAction } from "../../../../Redux/User/userActions";
+import { GrayContainer } from "../../Customer/ProfileScreen/ProfileScreen.Styles";
+import { handleUserUpdate } from "../../../../Redux/Admin/actions";
 
-function UpdateProfileScreen(props) {
-  const history = useHistory();
+function UpdateUserScreen(props) {
   const dispatch = useDispatch();
   const state = useSelector((store) => store);
   const userDetails = state.userDetails;
 
-  const { error, isLoading } = userDetails;
+  const { error, isLoading } = state.admin.updateUser;
 
   const handleSaveChanges = async (values) => {
-    dispatch(updateProfileAction(values, history));
+    dispatch(handleUserUpdate(state.userDetails.userProfile?.user._id, values));
   };
 
   useEffect(() => {
-    dispatch(getProfileAction());
-  }, [dispatch]);
+    dispatch(getProfileAction(props.match.params.id));
+  }, [dispatch, props.match.params.id]);
 
   return state.userDetails.userProfile?.isLoading ? (
     <SpinnerContainer />
@@ -52,17 +47,16 @@ function UpdateProfileScreen(props) {
           fontWeight={700}
           fontSize={32}
         >
-          My Profile
+          USER Profile
         </Typography>
 
         <Formik
           initialValues={{
             email: state.userDetails.userProfile?.user?.email,
-            password: "",
-            passwordConfirmation: "",
             name: state.userDetails.userProfile?.user?.name,
+            isAdmin: state.userDetails.userProfile?.user?.isAdmin,
           }}
-          validationSchema={updateProfileSchema()}
+          validationSchema={updateUserProfileSchema()}
           onSubmit={handleSaveChanges}
         >
           {({ errors, touched }) => {
@@ -87,20 +81,6 @@ function UpdateProfileScreen(props) {
                   <ErrorMsg>{errors.email}</ErrorMsg>
                 ) : null}
 
-                <Input
-                  name={"password"}
-                  type={"password"}
-                  placeholder={"password"}
-                />
-                {errors.password && touched.password ? (
-                  <ErrorMsg>{errors.password}</ErrorMsg>
-                ) : null}
-
-                <Input
-                  name={"passwordConfirmation"}
-                  type={"password"}
-                  placeholder={"Confirmation password"}
-                />
                 {errors.passwordConfirmation && touched.passwordConfirmation ? (
                   <ErrorMsg>{errors.passwordConfirmation}</ErrorMsg>
                 ) : null}
@@ -123,4 +103,4 @@ function UpdateProfileScreen(props) {
   );
 }
 
-export default UpdateProfileScreen;
+export default UpdateUserScreen;

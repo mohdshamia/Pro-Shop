@@ -3,7 +3,7 @@ import {
   InnerSection,
   SpinnerContainer,
   Typography,
-} from "../../../Global.Styles";
+} from "../../../../Global.Styles";
 import {
   ErrorMessage,
   OrderDetail,
@@ -13,10 +13,10 @@ import {
   Order as StyledOrder,
   SuccessMessage,
 } from "../Payment/Payment.Styles";
-import OrderCard from "../../../Components/OrderCard/OrderCard";
+import OrderCard from "../../../../Components/OrderCard/OrderCard";
 import { connect } from "react-redux";
 import { Component } from "react";
-import { getOrderById, payOrder } from "../../../Redux/Orders/ordersActions";
+import { getOrderById, payOrder } from "../../../../Redux/Orders/ordersActions";
 import { PayPalButton } from "react-paypal-button-v2";
 
 class Order extends Component {

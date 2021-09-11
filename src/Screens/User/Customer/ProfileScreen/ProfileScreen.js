@@ -1,8 +1,8 @@
-import { InnerSection, Typography } from "../../../Global.Styles";
+import { InnerSection, Typography } from "../../../../Global.Styles";
 import { GrayContainer, ProfileText, StyledRow } from "./ProfileScreen.Styles";
-import Button from "../../../Components/Button/Button";
+import Button from "../../../../Components/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from "../../../Redux/User/userActions";
+import { logoutAction } from "../../../../Redux/User/userActions";
 
 function ProfileScreen(props) {
   const state = useSelector((state) => state);

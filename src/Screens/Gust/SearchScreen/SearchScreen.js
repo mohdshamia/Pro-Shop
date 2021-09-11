@@ -5,7 +5,7 @@ import {
   SpinnerContainer,
   Typography,
 } from "../../../Global.Styles";
-import { ErrorMessage } from "../../User/Payment/Payment.Styles";
+import { ErrorMessage } from "../../User/Customer/Payment/Payment.Styles";
 import ProductCard from "../../../Components/ProductCard/ProductCard";
 import { search } from "../../../Redux/Guest/guestActions";
 import { useLocationWithQuery } from "react-router-query-hooks";

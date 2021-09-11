@@ -3,11 +3,11 @@ import {
   InnerSection,
   SpinnerContainer,
   Typography,
-} from "../../../Global.Styles";
+} from "../../../../Global.Styles";
 import { useDispatch, useSelector } from "react-redux";
 import { ErrorMessage } from "../Payment/Payment.Styles";
 import { useEffect } from "react";
-import { getOrders } from "../../../Redux/Orders/ordersActions";
+import { getOrders } from "../../../../Redux/Orders/ordersActions";
 import { ListBox, RowCell, StyledRow } from "./Orders.Styles";
 
 function Orders(props) {
