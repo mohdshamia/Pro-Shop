@@ -11,11 +11,10 @@ import {
   ErrorMsg,
   Input,
 } from "../../../../Components/FormInput/FormInput.Styles";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getProfileAction,
-  registerAction,
   updateProfileAction,
 } from "../../../../Redux/User/userActions";
 import { useHistory } from "react-router";

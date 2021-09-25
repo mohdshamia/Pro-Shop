@@ -35,7 +35,7 @@ export const cartReducer = (
     case DELETE_CART_ITEM:
       return {
         ...initialState,
-        cart: initialState.cart.filter((item) => item._id != action.payload),
+        cart: initialState.cart.filter((item) => item._id !== action.payload),
       };
 
     case ADD_SHIPPING_ADDRESS:

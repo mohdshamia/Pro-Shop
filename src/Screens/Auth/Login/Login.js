@@ -8,7 +8,7 @@ import {
 } from "../../../Components/FormInput/FormInput.Styles";
 import { Form, Formik } from "formik";
 import { loginSchema } from "../../../Valedation";
-import { useHistory, useLocation } from "react-router";
+import { useHistory } from "react-router";
 import { loginAction } from "../../../Redux/User/userActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocationWithQuery } from "react-router-query-hooks";

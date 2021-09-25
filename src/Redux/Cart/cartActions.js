@@ -10,7 +10,7 @@ export const addCartItem = (product, quantity) => (dispatch, getState) => {
   const state = getState();
 
   const isProductExist = state.cart.cart.find(
-    (item) => item._id == product._id
+    (item) => item._id === product._id
   );
 
   if (isProductExist) {
@@ -18,7 +18,7 @@ export const addCartItem = (product, quantity) => (dispatch, getState) => {
     isProductExist.qty += quantity;
 
     const index = state.cart.cart.findIndex(
-      (item) => item._id == isProductExist._id
+      (item) => item._id === isProductExist._id
     );
 
     state.cart.cart[index] = isProductExist;
@@ -46,7 +46,7 @@ export const decreaseCartItemQty =
     const state = getState();
 
     const isProductExist = state.cart.cart.find(
-      (item) => item._id == product._id
+      (item) => item._id === product._id
     );
 
     if (isProductExist) {
@@ -54,7 +54,7 @@ export const decreaseCartItemQty =
       isProductExist.qty -= quantity;
 
       const index = state.cart.cart.findIndex(
-        (item) => item._id == isProductExist._id
+        (item) => item._id === isProductExist._id
       );
 
       state.cart.cart[index] = isProductExist;

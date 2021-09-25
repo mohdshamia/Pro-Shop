@@ -23,9 +23,9 @@ function UserRouter() {
 
   const adminRoutes = state.userDetails.user.isAdmin
     ? [
-        <Route key={70} path={"/users"} exact={true} component={Users} />,
+        <Route key={"70"} path={"/users"} exact={true} component={Users} />,
         <Route
-          key={800}
+          key={"800"}
           path={"/edit-user/:id"}
           exact={true}
           component={UpdateUserScreen}
@@ -34,23 +34,28 @@ function UserRouter() {
     : [];
 
   return [
-    <Route key={50} path={"/order/:id"} exact={true} component={Order} />,
-    <Route key={2} path={"/orders"} exact={true} component={Orders} />,
-    <Route key={4} path={"/profile"} exact={true} component={ProfileScreen} />,
+    <Route key={"5552"} path={"/order/:id"} exact={true} component={Order} />,
+    <Route key={"4563"} path={"/orders"} exact={true} component={Orders} />,
+    <Route
+      key={"4267"}
+      path={"/profile"}
+      exact={true}
+      component={ProfileScreen}
+    />,
     <Route
       path={"/proceed-checkout/shipping-address"}
       exact={true}
-      key={405}
+      key={"405"}
       component={Payment}
     />,
     <Route
-      key={402}
+      key={"402"}
       path={"/proceed-checkout/place-order"}
       exact={true}
       component={Payment}
     />,
     <Route
-      key={6}
+      key={"6542"}
       path={"/update-profile"}
       exact={true}
       component={UpdateProfileScreen}

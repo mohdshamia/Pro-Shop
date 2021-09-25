@@ -12,16 +12,22 @@ const SearchScreen = lazy(() =>
   import("../Screens/Gust/SearchScreen/SearchScreen")
 );
 
-function GuestRouter(props) {
+function GuestRouter() {
   return [
-    <Route key={1} path={"/"} exact={true} component={HomeScreen} />,
+    <Route key={"1"} path={"/"} exact={true} component={HomeScreen} />,
     <Route
       path={"/product/:id/:name"}
       exact={true}
       component={ProductScreen}
+      key={"5549965"}
     />,
-    <Route key={3} path={"/cart"} exact={true} component={CartScreen} />,
-    <Route key={9874} path={"/search"} exact={true} component={SearchScreen} />,
+    <Route key={"3"} path={"/cart"} exact={true} component={CartScreen} />,
+    <Route
+      key={"9874"}
+      path={"/search"}
+      exact={true}
+      component={SearchScreen}
+    />,
   ];
 }
 

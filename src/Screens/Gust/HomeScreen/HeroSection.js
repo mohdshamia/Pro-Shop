@@ -14,7 +14,6 @@ import {
   SideBox,
 } from "./HomeScreen.Styles";
 import Button from "../../../Components/Button/Button";
-import slideImage from "../../../Assets/img1.PNG";
 import { useState } from "react";
 
 const styles = {

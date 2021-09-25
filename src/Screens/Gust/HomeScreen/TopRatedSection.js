@@ -1,7 +1,6 @@
 import {
   FlexBox,
   FlexColumn,
-  FlexRow,
   InnerSection,
   Typography,
 } from "../../../Global.Styles";

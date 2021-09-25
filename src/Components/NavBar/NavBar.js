@@ -91,6 +91,7 @@ export default function Navbar() {
           </Icon>
           {state.userDetails.user._id && (
             <Icon
+              as={"span"}
               style={{ marginTop: "auto" }}
               onClick={() => {
                 dispatch(logoutAction());
@@ -108,13 +109,6 @@ export default function Navbar() {
       <NavbarContainer>
         <InnerNav>
           <NavBox>
-            {/*
-          <Link to={"/"}>
-            <HeaderText>
-              <SpanNav>Pro</SpanNav>Shop
-            </HeaderText>
-          </Link>
-          */}
             <StyledLink to={"/"}>
               <SpanNav>Pro</SpanNav>Shop
             </StyledLink>
@@ -183,6 +177,7 @@ export default function Navbar() {
             </Icon>
             {state.userDetails.user._id && (
               <Icon
+                as={"span"}
                 onClick={() => {
                   dispatch(logoutAction());
                   localStorage.removeItem("user");

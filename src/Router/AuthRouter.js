@@ -10,14 +10,14 @@ function AuthRouter(props) {
   return (
     !state.userDetails.user._id && [
       <Route
-        key={4563}
+        key={"5698"}
         path={"/login"}
         component={() => {
           return <Login />;
         }}
       />,
       <Route
-        key={20}
+        key={"20"}
         path={"/register"}
         component={() => {
           return <Register />;

@@ -22,7 +22,7 @@ import { PayPalButton } from "react-paypal-button-v2";
 class Order extends Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     if (
-      this.props?.orders?.payOrder?.success !=
+      this.props?.orders?.payOrder?.success !==
       nextProps.orders?.payOrder?.success
     ) {
       this.props.getOrderById(this.props.match.params.id);

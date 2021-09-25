@@ -1,4 +1,6 @@
 import {
+  FlexColumn,
+  FlexRow,
   InnerSection,
   SpinnerContainer,
   Typography,
@@ -19,7 +21,6 @@ import { handleUserUpdate } from "../../../../Redux/Admin/actions";
 function UpdateUserScreen(props) {
   const dispatch = useDispatch();
   const state = useSelector((store) => store);
-  const userDetails = state.userDetails;
 
   const { error, isLoading } = state.admin.updateUser;
 
@@ -59,7 +60,7 @@ function UpdateUserScreen(props) {
           validationSchema={updateUserProfileSchema()}
           onSubmit={handleSaveChanges}
         >
-          {({ errors, touched }) => {
+          {({ errors, touched, setValues }) => {
             return (
               <Form
                 style={{
@@ -87,6 +88,37 @@ function UpdateUserScreen(props) {
 
                 {error ? <ErrorMsg>{error}</ErrorMsg> : null}
 
+                <Input name={"isAdmin"}>
+                  {({ field: { value }, form: { setFieldValue } }) => {
+                    return (
+                      <FlexColumn>
+                        <FlexRow style={{ justifyContent: "start" }}>
+                          <label htmlFor="Admin">Admin</label>
+                          <input
+                            type="radio"
+                            value={value}
+                            name={"isAdmin"}
+                            onChange={(e) => {
+                              setFieldValue("isAdmin", true);
+                            }}
+                          />
+                        </FlexRow>
+                        <FlexRow style={{ justifyContent: "start" }}>
+                          <label htmlFor="Customer">Customer</label>
+                          <input
+                            type="radio"
+                            value={!value}
+                            name={"isAdmin"}
+                            onChange={(e) => {
+                              setFieldValue("isAdmin", false);
+                            }}
+                          />
+                        </FlexRow>
+                      </FlexColumn>
+                    );
+                  }}
+                </Input>
+                {errors.isAdmin ? <ErrorMsg>{errors.isAdmin}</ErrorMsg> : null}
                 <Button
                   isLoading={isLoading}
                   style={{ marginTop: 50 }}

@@ -2,7 +2,6 @@ import { CardContainer, CardImage, CardLink } from "./ProductCard.Styles";
 import { FlexRow, Typography } from "../../Global.Styles";
 import Rating from "@material-ui/lab/Rating";
 import Button from "../Button/Button";
-import BookmarkBorderIcon from "@material-ui/icons/BookmarkBorder";
 import { useDispatch } from "react-redux";
 import { addCartItem } from "../../Redux/Cart/cartActions";
 
