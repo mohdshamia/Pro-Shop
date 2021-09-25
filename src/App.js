@@ -7,23 +7,20 @@ import GuestRouter from "./Router/GuestRouter";
 import UserRouter from "./Router/UserRouter";
 import ErrorBoundary from "./Components/ErrorBoundary/ErrorBoundary";
 import { Suspense } from "react";
-import UploadComponent from "./Screens/UploadComponent/UploadComponent";
 
 function App() {
   return (
     <MainContainer>
       <Suspense fallback={<SpinnerContainer />}>
         <ErrorBoundary>
-          {/*<NavBar />*/}
+          <NavBar />
           <Switch>
-            <Route path={"/"} component={UploadComponent} exact />
-            {/*
             {GuestRouter()}
             {UserRouter()}
             {AuthRouter()}
             <Route key={"65944"} path={"*"}>
               <NotFoundScreen />
-            </Route>*/}
+            </Route>
           </Switch>
         </ErrorBoundary>
       </Suspense>
